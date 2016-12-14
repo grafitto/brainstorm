@@ -1,14 +1,8 @@
-D:\REPOSITORIES\BrainStorm\BrainStorm\bin\Debug\BrainStorm.exe.config
-D:\REPOSITORIES\BrainStorm\BrainStorm\bin\Debug\BrainStorm.exe
-D:\REPOSITORIES\BrainStorm\BrainStorm\bin\Debug\BrainStorm.pdb
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\BrainStorm.csprojResolveAssemblyReference.cache
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\MainWindow.g.cs
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\App.g.cs
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\BrainStorm_MarkupCompile.cache
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\BrainStorm_MarkupCompile.lref
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\MainWindow.baml
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\BrainStorm.g.resources
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\BrainStorm.Properties.Resources.resources
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\BrainStorm.csproj.GenerateResource.Cache
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\BrainStorm.exe
-D:\REPOSITORIES\BrainStorm\BrainStorm\obj\Debug\BrainStorm.pdb
+C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\bin\Debug\brainstorm.exe.config
+C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\bin\Debug\brainstorm.exe
+C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\bin\Debug\brainstorm.pdb
+C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\obj\Debug\brainstorm.exe
+C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\obj\Debug\brainstorm.pdb
+D:\REPOSITORIES\brainstorm\brainstorm\bin\Debug\brainstorm.exe.config
+D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\brainstorm.exe
+D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\brainstorm.pdb
