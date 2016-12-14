@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs/brainstorm/v14/.suo
+/brainstorm/bin/*
+/brainstorm/obj/*
+/brainstorm.csproj
+/brainstorm.csproj.user
