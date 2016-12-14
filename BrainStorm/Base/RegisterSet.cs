@@ -13,17 +13,22 @@ namespace BrainStorm.Base
         //nullable int
         private int?[] registers;
 
-        /**
-         * Initialization if registers and indices
-         **/
+        /// <summary>
+        /// Initialization if registers and indices
+        /// </summary>
+        /// <param name="size"></param>
+        
         public RegisterSet(int size)
         {
             this.registers = new int?[size];
             this.indices = new Dictionary<string, int>();
         }
-        /**
-         * This looks for an index with the provided name, throws KeyNotFoundEsception if the key is not found
-         **/
+        /// <summary>
+        /// This looks for an index with the provided name, throws KeyNotFoundEsception if the key is not found
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>int</returns>
+        
         public int Lookup(String name)
         {
             if (this.indices.ContainsKey(name)) {
@@ -35,15 +40,12 @@ namespace BrainStorm.Base
                 throw up;
             }      
         }
-        /**
-         * This fetches a register value using an index
-         * <return>Nullable int</return>
-         * <parrams>int index</parrams>
-         * <example> 
-         * RegisterSet r = new RegisterSet(12);
-         * r.FetchRegister(3)
-         * </example>
-         **/
+        /// <summary>
+        /// This fetches a register value using an index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>Nullable int</returns>
+        
         public int? FetchRegister(int index)
         {
             if (this.registers.Length > index) { 
@@ -55,18 +57,24 @@ namespace BrainStorm.Base
                 throw up;
             }
         }
-        /**
-         * Returns a register referred to with the name provided
-         **/
+        /// <summary>
+        /// Returns a register referred to with the name provided
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>Nullable int</returns>
+        
         public int? FetchRegister(string name) {
 
                 int index = this.Lookup(name);
                 int? value = this.FetchRegister(name);
                 return value;
         }
-        /**
-         * This names a register using desirable names, many names can be assigned to a single register
-         **/
+        /// <summary>
+        /// This names a register using desirable names, many names can be assigned to a single register
+        /// </summary>
+        /// <param name="names"></param>
+        /// <param name="index"></param>
+        
         public void MakeRegister(string[] names, int index){
 
             foreach(var name in names) {
@@ -74,6 +82,11 @@ namespace BrainStorm.Base
                 this.indices.Add(name, index);
             }
         }
+        /// <summary>
+        /// Makes registers with names provided and the corresponding indices of the array
+        /// </summary>
+        /// <param name="names"></param>
+        
         public void MakeRegisters(string[] names) {
 
             for(int i = 0; i < names.Length; i++)
@@ -81,6 +94,12 @@ namespace BrainStorm.Base
                 this.MakeRegister(new string[] { names[i] }, i);
             }
         }
+        /// <summary>
+        /// This stores a value to a register using the register name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        
         public void StoreToName(string name, int value)
         {
             int index = this.Lookup(name);
