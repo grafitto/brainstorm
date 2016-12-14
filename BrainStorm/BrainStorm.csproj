@@ -67,6 +67,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Base\Instruction.cs" />
+    <Compile Include="Base\Processor.cs" />
+    <Compile Include="Base\RegisterSet.cs" />
+    <Compile Include="Exceptions\BrainStormException.cs" />
+    <Compile Include="Exceptions\IndexNotFoundException.cs" />
+    <Compile Include="Exceptions\KeyNotFoundException.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
