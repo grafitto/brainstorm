@@ -3,6 +3,9 @@ C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\bin
 C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\bin\Debug\brainstorm.pdb
 C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\obj\Debug\brainstorm.exe
 C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\obj\Debug\brainstorm.pdb
-D:\REPOSITORIES\brainstorm\brainstorm\bin\Debug\brainstorm.exe.config
-D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\brainstorm.exe
-D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\brainstorm.pdb
+D:\REPOSITORIES\BrainStorm\brainstorm\bin\Debug\brainstorm.exe.config
+D:\REPOSITORIES\BrainStorm\brainstorm\bin\Debug\brainstorm.exe
+D:\REPOSITORIES\BrainStorm\brainstorm\bin\Debug\brainstorm.pdb
+D:\REPOSITORIES\BrainStorm\brainstorm\obj\Debug\brainstorm.csprojResolveAssemblyReference.cache
+D:\REPOSITORIES\BrainStorm\brainstorm\obj\Debug\brainstorm.exe
+D:\REPOSITORIES\BrainStorm\brainstorm\obj\Debug\brainstorm.pdb

@@ -40,15 +40,23 @@
     <Compile Include="Base\Memory.cs" />
     <Compile Include="Base\Processor.cs" />
     <Compile Include="Base\RegisterSet.cs" />
-    <Compile Include="Exceptions\BrainStormException.cs" />
-    <Compile Include="Exceptions\IndexNotFoundException.cs" />
-    <Compile Include="Exceptions\KeyNotFoundException.cs" />
+    <Compile Include="Exceptions\AssemblerException.cs" />
+    <Compile Include="Exceptions\MemoryException.cs" />
+    <Compile Include="Exceptions\ProcessorException.cs" />
+    <Compile Include="Exceptions\RegisterException.cs" />
+    <Compile Include="Exceptions\RuntimeSimException.cs" />
+    <Compile Include="Exceptions\SimulationException.cs" />
     <Compile Include="Memory\DataMemory.cs" />
     <Compile Include="Memory\InstructionMemory.cs" />
+    <Compile Include="Processors\SP2000\Instructions\SP2000Instruction.cs" />
+    <Compile Include="Processors\SP2000\Processor\SP2000Processor.cs" />
     <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Processors\SP2000\Memory\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

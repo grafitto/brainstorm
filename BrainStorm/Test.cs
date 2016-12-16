@@ -9,6 +9,10 @@ namespace brainstorm
 {
     class MIPSRegisters : RegisterSet
     {
+        /// <summary>
+        /// This initializes the sie of the register set
+        /// </summary>
+        /// <param name="size"></param>
         public MIPSRegisters(int size) : base(size)
         {
         }
@@ -17,7 +21,10 @@ namespace brainstorm
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Testing");
+            MIPSRegisters reg = new MIPSRegisters(6);
+            reg.MakeRegister(new string[] { "$r1" }, 0);
+            reg.StoreToName("$r1", 45);
+
         }
     }
 }
