@@ -1,4 +1,5 @@
-﻿using BrainStorm.Exceptions;
+﻿using brainstorm.Exceptions;
+using BrainStorm.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace BrainStorm.Base
                 return this.indices[name];
             } else {
 
-                Exceptions.KeyNotFoundException up = new Exceptions.KeyNotFoundException("Name lookup in Registers was not successfull :-(");
+                RegisterException up = new RegisterException("Name lookup in Registers was not successfull :-(");
                 throw up;
             }      
         }
@@ -53,7 +54,7 @@ namespace BrainStorm.Base
                     return this.registers[index];
             } else {
 
-                Exceptions.IndexNotFoundException up = new Exceptions.IndexNotFoundException("Index out of Bound");
+                RegisterException up = new RegisterException("Index out of Bound");
                 throw up;
             }
         }
@@ -66,7 +67,7 @@ namespace BrainStorm.Base
         public int? FetchRegister(string name) {
 
                 int index = this.Lookup(name);
-                int? value = this.FetchRegister(name);
+                int? value = this.FetchRegister(index);
                 return value;
         }
         /// <summary>
@@ -104,6 +105,24 @@ namespace BrainStorm.Base
         {
             int index = this.Lookup(name);
             this.registers[index] = value;
+        }
+        public void ShowRegisters()
+        {
+            Console.WriteLine("Registers");
+            foreach(var register in registers)
+            {
+                if (register != null)
+                    Console.Write(register);
+                else
+                    Console.Write("NULL");
+                Console.Write(",");
+            }
+            Console.WriteLine("");
+            Console.WriteLine("Indices");
+            foreach(var index in indices)
+            {
+                Console.WriteLine(index.Key + " > " + index.Value);
+            }
         }
     }
 }
