@@ -1,5 +1,5 @@
 ﻿using brainstorm.Exceptions;
-using BrainStorm.Exceptions;
+using BrainStorm.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +37,7 @@ namespace BrainStorm.Base
                 return this.indices[name];
             } else {
 
-                RegisterException up = new RegisterException("Name lookup in Registers was not successfull :-(");
+                RegisterException up = new RegisterException("Name lookup for "+ name +" in Registers was not successfull :-(");
                 throw up;
             }      
         }
