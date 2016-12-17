@@ -1,15 +1,22 @@
 ﻿using BrainStorm.Base;
+using BrainStorm.Processors.SP2000.Processor;
 using System;
 
 namespace BrainStorm.Processor.SP2000.Instructions
 {
-    class SP2000Instruction : Instruction
+    abstract class SP2000Instruction : Instruction
     {
+        private int cycles = 1;
         public SP2000Instruction(string instruction) : base(instruction) { }
 
-        public override void execute(Base.Processor processor)
+        /// <summary>
+        /// This is where the instruction executes itself using the visitor partern
+        /// </summary>
+        /// <param name="processor"></param>
+
+        virtual public void execute(SP2000Processor processor)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
