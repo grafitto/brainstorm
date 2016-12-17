@@ -18,11 +18,5 @@
             this.instruction = instruction;
 
         }
-        /// <summary>
-        /// This is where the instruction executes itself using the visitor partern
-        /// </summary>
-        /// <param name="processor"></param>
-
-        abstract public void execute(Processor processor);
     }
 }
