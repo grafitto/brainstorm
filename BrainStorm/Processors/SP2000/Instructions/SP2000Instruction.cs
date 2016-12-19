@@ -1,6 +1,5 @@
 ﻿using BrainStorm.Base;
 using BrainStorm.Processors.SP2000.Processor;
-using System;
 
 namespace BrainStorm.Processor.SP2000.Instructions
 {
