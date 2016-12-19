@@ -12,5 +12,10 @@ namespace BrainStorm.Processors.SP2000.Memory
         public SP2000Registers(int size) : base(size)
         {
         }
+
+        internal void StoreToName(string destination, uint result)
+        {
+            base.StoreToName(destination, (int)result);
+        }
     }
 }
