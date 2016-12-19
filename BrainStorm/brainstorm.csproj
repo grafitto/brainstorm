@@ -48,9 +48,13 @@
     <Compile Include="Exceptions\SimulationException.cs" />
     <Compile Include="Memory\DataMemory.cs" />
     <Compile Include="Memory\InstructionMemory.cs" />
+    <Compile Include="Processors\SP2000\Instructions\AddiInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\AdduInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\AddInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\ArithmeticInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\SP2000Instruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\SubInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\SubuInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\ThreeOpInstruction.cs" />
     <Compile Include="Processors\SP2000\Memory\SP2000DataMemory.cs" />
     <Compile Include="Processors\SP2000\Memory\SP2000Registers.cs" />
