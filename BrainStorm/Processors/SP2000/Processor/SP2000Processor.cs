@@ -1,6 +1,5 @@
 ﻿using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processor.SP2000.Instructions;
-using BrainStorm.Processors.SP2000.Instructions;
 
 namespace BrainStorm.Processors.SP2000.Processor
 {
@@ -13,7 +12,7 @@ namespace BrainStorm.Processors.SP2000.Processor
         public void tick(SP2000Instruction instruction)
         {
             base.tick(instruction);
-            ((AddInstruction)instruction).execute(this);
+            instruction.execute(this);
         }
     }
 }
