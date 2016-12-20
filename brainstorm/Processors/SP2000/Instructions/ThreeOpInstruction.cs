@@ -6,9 +6,6 @@ namespace BrainStorm.Processors.SP2000.Instructions
 {
     abstract class ThreeOpInstruction : SP2000Instruction
     {
-        public ThreeOpInstruction(string instruction, string firstOperand, string secondOperand, string thirdOperand) : base(instruction)
-        {
-
-        }
+        public ThreeOpInstruction(string instruction, string firstOperand, string secondOperand, string thirdOperand) : base(instruction){}
     }
 }
