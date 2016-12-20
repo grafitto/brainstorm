@@ -18,5 +18,10 @@
             this.instruction = instruction;
 
         }
+
+        public override string ToString()
+        {
+            return this.instruction;
+        }
     }
 }
