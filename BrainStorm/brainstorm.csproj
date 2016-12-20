@@ -48,14 +48,25 @@
     <Compile Include="Exceptions\SimulationException.cs" />
     <Compile Include="Memory\DataMemory.cs" />
     <Compile Include="Memory\InstructionMemory.cs" />
-    <Compile Include="Processors\SP2000\Instructions\AddiInstruction.cs" />
-    <Compile Include="Processors\SP2000\Instructions\AdduInstruction.cs" />
-    <Compile Include="Processors\SP2000\Instructions\AddInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Arithmetic\AddiInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Arithmetic\AdduInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Arithmetic\AddInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Arithmetic\MoveInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Bitwise\AndiInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Bitwise\AndInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\ArithmeticInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Bitwise\NorInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Bitwise\OriInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Bitwise\OrInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Bitwise\SllInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Bitwise\SrlInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\SP2000Instruction.cs" />
-    <Compile Include="Processors\SP2000\Instructions\SubInstruction.cs" />
-    <Compile Include="Processors\SP2000\Instructions\SubuInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Arithmetic\SubInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Arithmetic\SubuInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\ThreeOpInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Bitwise\XoriInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Bitwise\XorInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\TwoOperandInstruction.cs" />
     <Compile Include="Processors\SP2000\Memory\SP2000DataMemory.cs" />
     <Compile Include="Processors\SP2000\Memory\SP2000Registers.cs" />
     <Compile Include="Processors\SP2000\Memory\SP200InstructionMemory.cs" />
@@ -63,6 +74,7 @@
     <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup />
