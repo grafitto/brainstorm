@@ -1,4 +1,5 @@
-﻿using brainstorm.Exceptions;
+﻿using brainstorm.Base;
+using brainstorm.Exceptions;
 using BrainStorm.Base;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,7 @@ namespace BrainStorm.Base
 {
     abstract class RegisterSet
     {
-        private Dictionary<String, int> indices;
-        //nullable int
-        private int[] registers;
+        private Register[] registers;
 
         /// <summary>
         /// Initialization if registers and indices
@@ -20,8 +19,7 @@ namespace BrainStorm.Base
         /// <param name="size"></param>
         public RegisterSet(int size)
         {
-            this.registers = new int[size];
-            this.indices = new Dictionary<string, int>();
+            this.registers = new Register[size];
         }
 
         /// <summary>
@@ -29,16 +27,34 @@ namespace BrainStorm.Base
         /// </summary>
         /// <param name="name"></param>
         /// <returns>int</returns>
-        public int Lookup(String name)
+        private Register Lookup(string name)
         {
-            if (this.indices.ContainsKey(name)) {
-
-                return this.indices[name];
+            Console.WriteLine("Looking up");
+            Register final = null;
+            foreach(Register register in registers) {
+                                                            //Console.WriteLine("  Looking for name: " + name + " on register: " + register.Names[0]);
+                foreach(string regName in register.Names) {
+                                                            //Console.WriteLine("     Comparing '" + name + "' with '" + regName + "'");
+                    if(regName.Equals(name))
+                    {
+                                                            //Console.WriteLine("      Found!!!");
+                        final = register;
+                    }else
+                    {
+                                                            //Console.WriteLine("     Not found, continue looking...");
+                    }
+                    if (final != null) break;
+                }
+                if (final != null) break;
+            }
+            if(final != null)
+            {
+                return final;
             } else {
-
-                RegisterException up = new RegisterException("Name lookup for "+ name +" in Registers was not successfull :-(");
-                throw up;
-            }      
+                throw new RegisterException("Name lookup for " + name + " in Registers was not successfull :-(");
+            }
+            
+              
         }
 
         /// <summary>
@@ -47,7 +63,7 @@ namespace BrainStorm.Base
         /// <param name="index"></param>
         /// <returns>Nullable int</returns>
         
-        public int FetchRegister(int index)
+        public Register FetchRegister(int index)
         {
             if (this.registers.Length > index) { 
 
@@ -65,11 +81,10 @@ namespace BrainStorm.Base
         /// <param name="name"></param>
         /// <returns>Nullable int</returns>
         
-        public int FetchRegister(string name) {
+        public Register FetchRegister(string name) {
 
-                int index = this.Lookup(name);
-                int value = this.FetchRegister(index);
-                return value;
+                return this.Lookup(name);
+                
         }
 
         /// <summary>
@@ -78,12 +93,12 @@ namespace BrainStorm.Base
         /// <param name="names"></param>
         /// <param name="index"></param>
         
-        public void MakeRegister(string[] names, int index){
+        public void MakeRegister(string[] names, int index, string text = "Register")
+        {
 
-            foreach(var name in names) {
-
-                this.indices.Add(name, index);
-            }
+            Register register = new Register(names, 0, text);
+            this.registers[index] = register;
+            
         }
 
         /// <summary>
@@ -91,11 +106,22 @@ namespace BrainStorm.Base
         /// </summary>
         /// <param name="names"></param>
         
-        public void MakeRegisters(string[] names) {
+        public void MakeRegisters(string[] names, string text = "Register") {
 
             for(int i = 0; i < names.Length; i++)
             {
-                this.MakeRegister(new string[] { names[i] }, i);
+                this.MakeRegister(new string[] { names[i] }, i, text);
+            }
+        }
+
+        public void MakeRegisters(string[] names, int[] indices, string text = "Register")
+        {
+            if(names.Length == indices.Length)
+            {
+                for(int i = 0; i < names.Length; i++)
+                {
+                    this.MakeRegister(new string[] { names[i] }, indices[i], text);
+                }
             }
         }
 
@@ -107,8 +133,8 @@ namespace BrainStorm.Base
         
         public void StoreToName(string name, int value)
         {
-            int index = this.Lookup(name);
-            this.registers[index] = value;
+            Register register = this.Lookup(name);
+            register.SetValue(value);
         }
 
         /// <summary>
@@ -117,18 +143,18 @@ namespace BrainStorm.Base
         public void ShowRegisters()
         {
             Console.WriteLine("Registers");
-            foreach(var register in registers)
+            foreach (Register register in registers)
             {
-                Console.Write(register);
-                Console.Write(",");
+                if (register != null) {
+                    Console.Write(register.Value);
+                    Console.Write(" ");
+                    Console.Write(register.Names[0]);
+                    Console.Write(" ");
+                    Console.Write(register.Text);
+                }
+                Console.WriteLine("");
             }
-            Console.WriteLine("");
-            Console.WriteLine("Indices");
-
-            foreach(var index in indices)
-            {
-                Console.WriteLine(index.Key + " > " + index.Value);
-            }
+       
         }
     }
 }
