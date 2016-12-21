@@ -1,4 +1,5 @@
-﻿using brainstorm.Exceptions;
+﻿using brainstorm.Base;
+using brainstorm.Exceptions;
 using BrainStorm.Processors.SP2000.Instructions;
 using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
@@ -18,14 +19,14 @@ namespace brainstorm.Processors.SP2000.Instructions.Arithmetic
         /// This excecuted the instruction and changes the CPU register values
         /// </summary>
         /// <param name="processor"></param>
-        public override void execute(SP2000Processor processor)
+        public override void execute(SP2000Core processor)
         {
             SP2000Registers registers = (SP2000Registers)processor.Registers;
             int result = 0;
             try
             {
-                int value = registers.FetchRegister(secondOperand);
-                result = 0 + value;
+                Register value = registers.FetchRegister(secondOperand);
+                result = 0 + value.Value;
             }
             catch (RegisterException e)
             {

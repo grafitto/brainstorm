@@ -2,6 +2,7 @@
 using brainstorm.Exceptions;
 using BrainStorm.Processors.SP2000.Processor;
 using BrainStorm.Processors.SP2000.Memory;
+using brainstorm.Base;
 
 namespace BrainStorm.Processors.SP2000.Instructions
 {
@@ -16,15 +17,15 @@ namespace BrainStorm.Processors.SP2000.Instructions
         /// This excecuted the instruction and changes the CPU register values
         /// </summary>
         /// <param name="processor"></param>
-        public override void execute(SP2000Processor processor)
+        public override void execute(SP2000Core processor)
         {
             SP2000Registers registers = (SP2000Registers)processor.Registers;
             int result = 0;
             try {
-                int first = registers.FetchRegister(firstOperand);
-                int second = registers.FetchRegister(secondOperand);
+                Register first = registers.FetchRegister(firstOperand);
+                Register second = registers.FetchRegister(secondOperand);
 
-                result = first + second;
+                result = first.Value + second.Value;
 
             }catch(RegisterException e) {
                 Console.WriteLine(e.Message);
