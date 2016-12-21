@@ -9,3 +9,4 @@ D:\REPOSITORIES\brainstorm\brainstorm\bin\Debug\brainstorm.pdb
 D:\REPOSITORIES\brainstorm\brainstorm\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\brainstorm.exe
 D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\brainstorm.pdb
+D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\brainstorm.csprojResolveAssemblyReference.cache
