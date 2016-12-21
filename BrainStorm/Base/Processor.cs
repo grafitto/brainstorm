@@ -20,19 +20,18 @@ namespace BrainStorm.Base
             get { return memory; }
             set { this.memory = Memory; }
         }
-        private RegisterSet registers;
-
-        public RegisterSet Registers
+        private int cores;
+        public int Cores
         {
-            get { return registers; }
-            set { this.registers = Registers; }
+            get { return cores; }
+            set { this.cores = Cores; }
         }
 
-        public Processor(InstructionMemory program, DataMemory memory, RegisterSet registers)
+        public Processor(InstructionMemory program, DataMemory memory, int cores = 1)
         {
             this.program = program;
             this.memory = memory;
-            this.registers = registers;
+            this.cores = cores;
         }
 
         /// <summary>
