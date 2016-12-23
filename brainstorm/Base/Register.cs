@@ -34,6 +34,10 @@ namespace brainstorm.Base
             this.value = value;
             this.text = text;
         }
+        public int GetValue()
+        {
+            return value;
+        }
         public void SetValue(int value)
         {
             this.value = value;
