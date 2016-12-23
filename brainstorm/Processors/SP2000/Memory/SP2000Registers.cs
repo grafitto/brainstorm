@@ -9,7 +9,7 @@ namespace BrainStorm.Processors.SP2000.Memory
 {
     class SP2000Registers : RegisterSet
     {
-        public SP2000Registers() : base(32)
+        public SP2000Registers() : base(35)
         {
             this.MakeRegister(new string[] { "zero" }, 0, "This register is hardwired to ZERO and cannot be changed"); //Always ZERO
             this.MakeRegister(new string[] { "$at" }, 1);
@@ -59,6 +59,9 @@ namespace BrainStorm.Processors.SP2000.Memory
 
             //Return address
             this.MakeRegister(new string[] { "$ra" }, 31);
+
+            //These addresses are UNTOUCHABLE
+            this.MakeRegisters(new string[] { "PC", "HI", "LO" }, new int[] { 32, 33, 34 });
         }
 
         internal void StoreToName(string destination, uint result)
