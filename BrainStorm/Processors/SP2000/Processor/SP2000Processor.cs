@@ -7,18 +7,18 @@ namespace BrainStorm.Processors.SP2000.Processor
     {
         private SP2000Core[] cores;
         private int context = 0;
-        public SP2000Processor(SP200InstructionMemory program, SP2000DataMemory memory, SP2000Registers registers, int cores = 1) : base(program, memory, cores)
+        public SP2000Processor(SP200InstructionMemory program, SP2000DataMemory memory, int cores = 1) : base(program, memory, cores)
         {
             this.cores = new SP2000Core[cores];
             for(int i = 0; i < this.cores.Length; i++)
             {
-                this.cores[i] = new SP2000Core(registers);
+                this.cores[i] = new SP2000Core(program);
             }
         }
-        public void tick(SP2000Instruction instruction)
+        public override void tick()
         {
-            base.tick(instruction);
-            instruction.execute(cores[context]);
+            base.tick();
+            cores[context].execute();
         }
     }
 }
