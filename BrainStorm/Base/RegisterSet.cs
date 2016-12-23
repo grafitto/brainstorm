@@ -29,7 +29,7 @@ namespace BrainStorm.Base
         /// <returns>int</returns>
         private Register Lookup(string name)
         {
-            Console.WriteLine("Looking up");
+            //Console.WriteLine("Looking up");
             Register final = null;
             foreach(Register register in registers) {
                                                             //Console.WriteLine("  Looking for name: " + name + " on register: " + register.Names[0]);
@@ -39,9 +39,6 @@ namespace BrainStorm.Base
                     {
                                                             //Console.WriteLine("      Found!!!");
                         final = register;
-                    }else
-                    {
-                                                            //Console.WriteLine("     Not found, continue looking...");
                     }
                     if (final != null) break;
                 }
