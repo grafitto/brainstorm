@@ -1,7 +1,7 @@
 ﻿using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
 using System;
-using brainstorm.Processors.SP2000.Instructions.Bitwise;
+using brainstorm.Processors.SP2000.Instructions.Arithmetic;
 
 namespace BrainStorm
 {
@@ -10,23 +10,16 @@ namespace BrainStorm
     {
         public static void Main(string[] args)
         {
-           SP2000Registers registers = new SP2000Registers();
-
-           registers.StoreToName("$s2", 4);
-           registers.StoreToName("$s0", 60);
-           registers.StoreToName("$s1", 2);
-           //registers.ShowRegisters();
-
            
             SP200InstructionMemory program = new SP200InstructionMemory();
             SP2000DataMemory memory = new SP2000DataMemory();
+            MoveInstruction add = new MoveInstruction("mov $v0, $v1", "$v0", "$v1");
+            program.push(add, 0);
 
-            SP2000Processor chip = new SP2000Processor(program, memory, registers);
+            SP2000Processor chip = new SP2000Processor(program, memory);
 
-            SrlInstruction add = new SrlInstruction("srl $s2, $s0, 2", "$s2", "$s0", "2");
-
-            chip.tick(add);
-            registers.ShowRegisters();
+            chip.tick();
+            //registers.ShowRegisters();
 
             /*  int value = 1088;
 
