@@ -29,9 +29,9 @@ namespace brainstorm.Processors.SP2000.Instructions.Bitwise
         /// This excecuted the instruction and changes the CPU register values
         /// </summary>
         /// <param name="processor"></param>
-        public override void execute(SP2000Core processor)
+        public override void execute(SP2000Core core)
         {
-            SP2000Registers registers = (SP2000Registers)processor.Registers;
+            SP2000Registers registers = (SP2000Registers)core.Registers;
             int result = 0;
             try
             {
@@ -45,6 +45,7 @@ namespace brainstorm.Processors.SP2000.Instructions.Bitwise
             finally
             {
                 registers.StoreToName(destination, result);
+                this.increamentPC(core);
             }
         }
     }
