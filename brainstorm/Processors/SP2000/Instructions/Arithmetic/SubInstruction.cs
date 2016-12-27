@@ -32,7 +32,7 @@ namespace brainstorm.Processors.SP2000.Instructions
                 Register first = registers.FetchRegister(firstOperand);
                 Register second = registers.FetchRegister(secondOperand);
 
-                result = first.Value - second.Value;
+                result = first.GetValue() - second.GetValue();
 
             }
             catch (RegisterException e)
