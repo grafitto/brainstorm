@@ -1,5 +1,7 @@
 ﻿using BrainStorm.Processors.SP2000.Memory;
-using BrainStorm.Processor.SP2000.Instructions;
+using brainstorm.Processors.SP2000.Processor;
+using brainstorm.Base;
+using System.Threading;
 
 namespace BrainStorm.Processors.SP2000.Processor
 {
@@ -7,18 +9,53 @@ namespace BrainStorm.Processors.SP2000.Processor
     {
         private SP2000Core[] cores;
         private int context = 0;
-        public SP2000Processor(SP200InstructionMemory program, SP2000DataMemory memory, int cores = 1) : base(program, memory, cores)
+        private static int DEFAULT_CONTEXT = 0;
+        private static int INC_CONTEXT_PC = 0;
+
+        public SP2000Processor(SP200InstructionMemory program, SP2000DataMemory memory, int cores = 2) : base(program, memory, cores)
         {
             this.cores = new SP2000Core[cores];
-            for(int i = 0; i < this.cores.Length; i++)
+            for(int i = 0; i < cores; i++)
             {
-                this.cores[i] = new SP2000Core(program);
+                this.cores[i] = new SP2000Core(program, context);
+                Contexts cxt = Contexts.Instance;
+                cxt.AddCotext(i);
             }
         }
-        public override void tick()
+        public override void Tick()
         {
-            base.tick();
-            cores[context].execute();
+            for(int i = 0; i < this.cores.Length; i++)
+            {
+                Contexts contexts = Contexts.Instance;
+                if(i == DEFAULT_CONTEXT)
+                {
+                    if(contexts.GetContextAddress(DEFAULT_CONTEXT) != -1)
+                    {
+                        SP2000Registers registers = (SP2000Registers)this.cores[DEFAULT_CONTEXT].Registers;
+                        Register pc = registers.FetchRegister("PC");
+                        pc.SetValue(contexts.GetContextAddress(DEFAULT_CONTEXT));
+                        contexts.SetContextAddress(DEFAULT_CONTEXT, -1);
+                    }
+                    this.cores[DEFAULT_CONTEXT].execute();
+                }
+                else
+                {
+                    if (contexts.GetContextAddress(i) != DEFAULT_CONTEXT)
+                    {
+                        if(contexts.GetContextAddress(i) != INC_CONTEXT_PC)
+                        {
+                            SP2000Registers registers = (SP2000Registers)this.cores[i].Registers;
+                            Register pc = registers.FetchRegister("PC");
+                            pc.SetValue(contexts.GetContextAddress(i));
+                            contexts.SetContextAddress(i, 0);
+                        }
+                        else
+                        {
+                            new Thread(new ThreadStart(this.cores[i].execute)).Start();
+                        }
+                    }
+                }
+            }
         }
     }
 }
