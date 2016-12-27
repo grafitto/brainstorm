@@ -16,7 +16,7 @@ namespace BrainStorm.Processor.SP2000.Instructions
         /// </summary>
         /// <param name="processor"></param>
 
-        virtual public void execute(SP2000Core processor)
+        virtual public void execute(SP2000Core core)
         {
 
         }
