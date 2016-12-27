@@ -39,6 +39,6 @@ namespace BrainStorm.Base
         /// </summary>
         /// <param name="instruction"></param>
 
-        public virtual void tick() { }
+        public virtual void Tick() { }
     }
 }
