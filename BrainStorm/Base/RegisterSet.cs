@@ -151,7 +151,7 @@ namespace BrainStorm.Base
                 }
                 Console.WriteLine("");
             }
-       
+            Console.WriteLine("__________________________________________________");
         }
     }
 }
