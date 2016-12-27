@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace brainstorm.Base
@@ -27,6 +28,6 @@ namespace brainstorm.Base
             this.registers = registers;
             this.program = program;
         }
-        public abstract void execute(int? address = null);
+        public abstract void execute();
     }
 }
