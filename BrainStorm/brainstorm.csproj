@@ -62,6 +62,7 @@
     <Compile Include="Processors\SP2000\Instructions\Bitwise\OrInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\SllInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\SrlInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\LiInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\SP2000Instruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\SubInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\SubuInstruction.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Processors\SP2000\Memory\SP2000DataMemory.cs" />
     <Compile Include="Processors\SP2000\Memory\SP2000Registers.cs" />
     <Compile Include="Processors\SP2000\Memory\SP200InstructionMemory.cs" />
+    <Compile Include="Processors\SP2000\Processor\Contexts.cs" />
     <Compile Include="Processors\SP2000\Processor\SP2000Core.cs" />
     <Compile Include="Processors\SP2000\Processor\SP2000Processor.cs" />
     <Compile Include="Test.cs" />
