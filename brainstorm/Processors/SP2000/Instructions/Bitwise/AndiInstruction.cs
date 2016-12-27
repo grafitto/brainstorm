@@ -14,15 +14,9 @@ namespace brainstorm.Processors.SP2000.Instructions.Bitwise
     class AndiInstruction : ArithmeticInstruction
     {
         private int immidiate;
-        public AndiInstruction(string instruction, string destination, string firstOperand, string secondOperand) : base(instruction, destination, firstOperand, secondOperand)
+        public AndiInstruction(string instruction, string destination, string firstOperand, int secondOperand) : base(instruction, destination, firstOperand, secondOperand.ToString())
         {
-            try
-            {
-                immidiate = int.Parse(secondOperand);
-            }catch(FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            immidiate = secondOperand;
         }
 
         /// <summary>

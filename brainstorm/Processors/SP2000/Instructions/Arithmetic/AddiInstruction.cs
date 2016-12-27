@@ -9,17 +9,10 @@ namespace brainstorm.Processors.SP2000.Instructions
 {
     class AddiInstruction : ArithmeticInstruction
     {
-        public int immidiate;
-        public AddiInstruction(string instruction, string destination, string firstOperand, string secondOperand) : base(instruction, destination, firstOperand, secondOperand)
+        private int immidiate;
+        public AddiInstruction(string instruction, string destination, string firstOperand, int secondOperand) : base(instruction, destination, firstOperand, secondOperand.ToString())
         {
-            try
-            {
-                this.immidiate = int.Parse(secondOperand);
-
-            }catch(FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            immidiate = secondOperand;
         }
 
         /// <summary>

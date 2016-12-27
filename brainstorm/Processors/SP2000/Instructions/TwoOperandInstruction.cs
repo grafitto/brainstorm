@@ -9,6 +9,11 @@ namespace brainstorm.Processors.SP2000.Instructions
 {
     class TwoOperandInstruction : SP2000Instruction
     {
-        public TwoOperandInstruction(string instruction, string firstOperand, string secondOperand) : base(instruction){}
+        protected string firstOperand;
+        protected string secondOperand;
+        public TwoOperandInstruction(string instruction, string firstOperand, string secondOperand) : base(instruction){
+            this.firstOperand = firstOperand;
+            this.secondOperand = secondOperand;
+        }
     }
 }
