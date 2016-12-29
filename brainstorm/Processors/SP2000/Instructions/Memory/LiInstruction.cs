@@ -37,6 +37,7 @@ namespace brainstorm.Processors.SP2000.Instructions.Memory
             finally
             {
                 this.increamentPC(core);
+                core.Cycles += Cycles;
             }
         }
     }
