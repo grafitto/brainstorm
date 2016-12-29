@@ -8,5 +8,6 @@ namespace BrainStorm.Memory
 {
     class DataMemory : Base.Memory
     {
+        public DataMemory(int size) : base(size) { }
     }
 }
