@@ -10,20 +10,22 @@ namespace BrainStorm.Processors.SP2000.Processor
         private SP2000Core[] cores;
         private int context = 0;
         private static int DEFAULT_CONTEXT = 0;
-        private static int INC_CONTEXT_PC = 0;
+        //private static int INC_CONTEXT_PC = 0;
 
-        public SP2000Processor(SP200InstructionMemory program, SP2000DataMemory memory, int cores = 2) : base(program, memory, cores)
+        public SP2000Processor(SP200InstructionMemory program, int cores = 1) : base(program, cores)
         {
             this.cores = new SP2000Core[cores];
             for(int i = 0; i < cores; i++)
             {
                 this.cores[i] = new SP2000Core(program, context);
-                Contexts cxt = Contexts.Instance;
-                cxt.AddCotext(i);
+                //Contexts cxt = Contexts.Instance;
+                //cxt.AddCotext(i);
             }
         }
         public override void Tick()
         {
+            this.cores[DEFAULT_CONTEXT].execute();
+            /*
             for(int i = 0; i < this.cores.Length; i++)
             {
                 Contexts contexts = Contexts.Instance;
@@ -47,7 +49,7 @@ namespace BrainStorm.Processors.SP2000.Processor
                             SP2000Registers registers = (SP2000Registers)this.cores[i].Registers;
                             Register pc = registers.FetchRegister("PC");
                             pc.SetValue(contexts.GetContextAddress(i));
-                            contexts.SetContextAddress(i, 0);
+                            contexts.SetContextAddress(i, INC_CONTEXT_PC);
                         }
                         else
                         {
@@ -56,6 +58,11 @@ namespace BrainStorm.Processors.SP2000.Processor
                     }
                 }
             }
+            */
+        }
+        public void ShowRegisters()
+        {
+            this.cores[DEFAULT_CONTEXT].Registers.ShowRegisters();
         }
     }
 }
