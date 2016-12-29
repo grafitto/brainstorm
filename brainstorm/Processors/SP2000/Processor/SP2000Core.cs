@@ -8,8 +8,8 @@ namespace BrainStorm.Processors.SP2000.Processor
 {
     class SP2000Core : Core
     {
-        private RegisterSet registers;
-        public new RegisterSet Registers
+        private SP2000RegisterSet registers;
+        public new SP2000RegisterSet Registers
         {
             get { return registers; }
         }
@@ -18,6 +18,7 @@ namespace BrainStorm.Processors.SP2000.Processor
         {
             get { return context; }
         }
+        public int Cycles { get; set; }
         public SP2000Core(InstructionMemory program, int context) : base(program)
         {
             registers = new SP2000Registers();
@@ -33,7 +34,7 @@ namespace BrainStorm.Processors.SP2000.Processor
                 Register register = registers.FetchRegister("PC");
                 SP2000Instruction current = this.getInstruction(register.Value);
                 current.execute(this);
-                Registers.ShowRegisters(); //Will change in future
+                //Registers.ShowRegisters(); //Will change in future
         }
 
         /// <summary>
