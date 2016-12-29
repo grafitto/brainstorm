@@ -13,13 +13,6 @@ namespace BrainStorm.Base
             set { this.program = Program; }
         }
 
-        private DataMemory memory;
-
-        public DataMemory Memory
-        {
-            get { return memory; }
-            set { this.memory = Memory; }
-        }
         private int cores;
         public int Cores
         {
@@ -27,10 +20,9 @@ namespace BrainStorm.Base
             set { this.cores = Cores; }
         }
 
-        public Processor(InstructionMemory program, DataMemory memory, int cores = 1)
+        public Processor(InstructionMemory program, int cores = 1)
         {
             this.program = program;
-            this.memory = memory;
             this.cores = cores;
         }
 
