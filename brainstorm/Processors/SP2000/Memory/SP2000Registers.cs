@@ -1,8 +1,10 @@
-﻿using BrainStorm.Base;
+﻿using brainstorm.Base;
+using BrainStorm.Base;
+using System;
 
 namespace BrainStorm.Processors.SP2000.Memory
 {
-    class SP2000Registers : RegisterSet
+    class SP2000Registers : SP2000RegisterSet
     {
         public SP2000Registers() : base(35)
         {
@@ -69,6 +71,21 @@ namespace BrainStorm.Processors.SP2000.Memory
             {
                 base.StoreToName(destination, result);
             }
+        }
+        internal long GetHILO64()
+        {
+            int hi = FetchRegister("HI").GetValue();
+            int lo = FetchRegister("LO").GetValue();
+
+            long temp = (hi << 32);
+            return (temp | (long)lo);
+        }
+        internal void SetHILO64(long value)
+        {
+            int lo = (int)(value & 0x00000000FFFFFFFF);
+            StoreToName("LO", lo);
+            int hi = (int)((value & unchecked((long)0xFFFFFFFF00000000)) >> 32);
+            StoreToName("HI", hi);
         }
     }
 }
