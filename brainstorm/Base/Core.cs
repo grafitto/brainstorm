@@ -11,8 +11,8 @@ namespace brainstorm.Base
 {
     abstract class Core
     {
-        private RegisterSet registers;
-        public RegisterSet Registers
+        private SP2000RegisterSet registers;
+        public SP2000RegisterSet Registers
         {
             get { return this.registers; }
             set { this.registers = Registers; }
