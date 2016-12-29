@@ -53,7 +53,9 @@
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\AddiInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\AdduInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\AddInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Arithmetic\DivInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\MoveInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Arithmetic\MultInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\AndiInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\AndInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\ArithmeticInstruction.cs" />
@@ -62,7 +64,14 @@
     <Compile Include="Processors\SP2000\Instructions\Bitwise\OrInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\SllInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\SrlInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\LbInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Memory\LiInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\LwInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\MfhiInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\MfloInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\SbInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\SwInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\OneOperandInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\SP2000Instruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\SubInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\SubuInstruction.cs" />
