@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BrainStorm.Base
 {
-    abstract class RegisterSet
+    abstract class SP2000RegisterSet
     {
         private Register[] registers;
 
@@ -17,7 +17,7 @@ namespace BrainStorm.Base
         /// Initialization if registers and indices
         /// </summary>
         /// <param name="size"></param>
-        public RegisterSet(int size)
+        public SP2000RegisterSet(int size)
         {
             this.registers = new Register[size];
         }
@@ -142,7 +142,7 @@ namespace BrainStorm.Base
             Console.WriteLine("Registers");
             foreach (Register register in registers)
             {
-                if (register != null) {
+                if (register != null && register.GetValue() != 0) {
                     Console.Write(register.Value);
                     Console.Write(" ");
                     Console.Write(register.Names[0]);
