@@ -43,6 +43,7 @@ namespace brainstorm.Processors.SP2000.Instructions.Bitwise
             {
                 registers.StoreToName(destination, result);
                 this.increamentPC(core);
+                core.Cycles += Cycles;
             }
         }
     }

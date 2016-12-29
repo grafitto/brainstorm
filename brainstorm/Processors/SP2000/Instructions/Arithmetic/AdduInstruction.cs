@@ -37,6 +37,7 @@ namespace brainstorm.Processors.SP2000.Instructions
             {
                 registers.StoreToName(destination, result);
                 this.increamentPC(core);
+                core.Cycles = Cycles;
             }
         }
     }
