@@ -9,6 +9,7 @@ namespace BrainStorm.Processor.SP2000.Instructions
     abstract class SP2000Instruction : Instruction
     {
         private int cycles = 1;
+        public new int Cycles { get { return cycles; } set { cycles = Cycles; } }
         public SP2000Instruction(string instruction) : base(instruction) { }
 
         /// <summary>
