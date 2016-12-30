@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace brainstorm.Base
+namespace BrainStorm.Base
 {
     class Register
     {

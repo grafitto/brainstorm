@@ -1,8 +1,8 @@
 ﻿using System;
-using brainstorm.Exceptions;
+using BrainStorm.Exceptions;
 using BrainStorm.Processors.SP2000.Processor;
 using BrainStorm.Processors.SP2000.Memory;
-using brainstorm.Base;
+using BrainStorm.Base;
 
 namespace BrainStorm.Processors.SP2000.Instructions
 {

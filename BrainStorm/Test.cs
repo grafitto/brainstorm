@@ -1,7 +1,7 @@
 ﻿using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
 using System;
-using brainstorm.Processors.SP2000.Instructions.Bitwise;
+using BrainStorm.Processors.SP2000.Instructions.Bitwise;
 
 namespace BrainStorm
 {

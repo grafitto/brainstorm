@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace brainstorm.Exceptions
+namespace BrainStorm.Exceptions
 {
     class AssemblerException : SimulationException
     {

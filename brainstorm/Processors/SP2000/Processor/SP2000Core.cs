@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BrainStorm.Base;
 using BrainStorm.Memory;
-using brainstorm.Base;
+using BrainStorm.Base;
 using BrainStorm.Processor.SP2000.Instructions;
 
 namespace BrainStorm.Processors.SP2000.Processor

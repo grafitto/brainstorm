@@ -1,5 +1,5 @@
-﻿using brainstorm.Base;
-using brainstorm.Exceptions;
+﻿using BrainStorm.Base;
+using BrainStorm.Exceptions;
 using BrainStorm.Processors.SP2000.Instructions;
 using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace brainstorm.Processors.SP2000.Instructions.Bitwise
+namespace BrainStorm.Processors.SP2000.Instructions.Bitwise
 {
     class XoriInstruction : ArithmeticInstruction
     {
