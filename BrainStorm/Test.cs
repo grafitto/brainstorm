@@ -5,6 +5,8 @@ using brainstorm.Processors.SP2000.Instructions.Arithmetic;
 using brainstorm.Processors.SP2000.Instructions.Memory;
 using brainstorm.Processors.SP2000.Instructions;
 using brainstorm.Base;
+using brainstorm.Processors.SP2000.Instructions.Branch;
+using brainstorm.Processors.SP2000.Instructions.Jump;
 
 namespace BrainStorm
 {
@@ -16,32 +18,20 @@ namespace BrainStorm
             
                 SP200InstructionMemory program = new SP200InstructionMemory();
                 SP2000DataMemory memory = new SP2000DataMemory();
-                LiInstruction li = new LiInstruction("li $v1, 4", "$v1", 4);
-                SwInstruction sw = new SwInstruction("sw $v1, 4", "$v1", 12);
-                SwInstruction lw = new SwInstruction("sw $v1, 2($v1)", "$v1", "-1($v1)");
-                //DivInstruction mul = new DivInstruction("div $v1, $v0", "$v1", "$v0");
-                //MfhiInstruction mfhi = new MfhiInstruction("mfhi $a0", "$a0");
-                //MfloInstruction mflo = new MfloInstruction("mflo $a1", "$a1");
-                //SwInstruction sw = new SwInstruction("sw $v1, 4", "$v1", 4);
-                //SbInstruction sb = new SbInstruction("sw $v0, 0", "$v0", 0);
-                program.Push(li, 0);
-                program.Push(sw, 1);
-                program.Push(lw, 2);
-                //program.Push(mul, 2);
-                // program.Push(mfhi, 3);
-                //program.Push(mflo, 4);
-                //program.Push(sw, 5);
-                // program.Push(sb, 6);
+                //JalInstruction li = new JalInstruction("jal 4", 40);
+                LaInstruction lia = new LaInstruction("li $v0, 3", "$v0", 4);
+                //JrInstruction j = new JrInstruction("jr $ra", "$v0");
+                //BeqInstruction lw = new BeqInstruction("blt $v1, $v0, 0", "$v1", "$v0", 20);
+
+                program.Push(lia, 0);
+                //program.Push(li, 1);
+                //program.Push(j, 1);
 
                 SP2000Processor chip = new SP2000Processor(program);
 
+                //chip.Tick();
+                //chip.Tick();
                 chip.Tick();
-                chip.Tick();
-                chip.Tick();
-                // chip.Tick();
-                // chip.Tick();
-                // chip.Tick();
-                // chip.Tick();
                 chip.ShowRegisters();
 
 
