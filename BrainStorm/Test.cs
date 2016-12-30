@@ -1,11 +1,11 @@
 ﻿using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
 using System;
-using brainstorm.Processors.SP2000.Instructions.Arithmetic;
+using BrainStorm.Processors.SP2000.Instructions.Arithmetic;
 using BrainStorm.Processors.SP2000.Instructions.Memory;
-using brainstorm.Processors.SP2000.Instructions;
-using brainstorm.Base;
-using brainstorm.Processors.SP2000.Instructions.Branch;
+using BrainStorm.Processors.SP2000.Instructions;
+using BrainStorm.Base;
+using BrainStorm.Processors.SP2000.Instructions.Branch;
 using BrainStorm.Processors.SP2000.Instructions.Jump;
 
 namespace BrainStorm

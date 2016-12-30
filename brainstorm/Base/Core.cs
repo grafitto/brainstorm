@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace brainstorm.Base
+namespace BrainStorm.Base
 {
     abstract class Core
     {

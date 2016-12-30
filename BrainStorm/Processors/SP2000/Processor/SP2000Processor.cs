@@ -1,6 +1,6 @@
 ﻿using BrainStorm.Processors.SP2000.Memory;
-using brainstorm.Processors.SP2000.Processor;
-using brainstorm.Base;
+using BrainStorm.Processors.SP2000.Processor;
+using BrainStorm.Base;
 using System.Threading;
 
 namespace BrainStorm.Processors.SP2000.Processor

@@ -2,10 +2,10 @@
 using BrainStorm.Processors.SP2000.Instructions;
 using BrainStorm.Processors.SP2000.Processor;
 using BrainStorm.Processors.SP2000.Memory;
-using brainstorm.Base;
-using brainstorm.Exceptions;
+using BrainStorm.Base;
+using BrainStorm.Exceptions;
 
-namespace brainstorm.Processors.SP2000.Instructions.Branch
+namespace BrainStorm.Processors.SP2000.Instructions.Branch
 {
     class BltInstruction : ThreeOperandInstruction
     {

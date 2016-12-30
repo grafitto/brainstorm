@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using BrainStorm.Processors.SP2000.Processor;
 using BrainStorm.Processors.SP2000.Memory;
-using brainstorm.Exceptions;
-using brainstorm.Base;
+using BrainStorm.Exceptions;
+using BrainStorm.Base;
 
 namespace BrainStorm.Processors.SP2000.Instructions.Jump
 {

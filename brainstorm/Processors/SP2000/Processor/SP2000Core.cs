@@ -1,6 +1,6 @@
 ﻿using BrainStorm.Base;
 using BrainStorm.Memory;
-using brainstorm.Base;
+using BrainStorm.Base;
 using BrainStorm.Processor.SP2000.Instructions;
 using BrainStorm.Processors.SP2000.Memory;
 

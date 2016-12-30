@@ -1,5 +1,5 @@
 ﻿
-using brainstorm.Exceptions;
+using BrainStorm.Exceptions;
 using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
 

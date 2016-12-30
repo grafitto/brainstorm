@@ -1,8 +1,8 @@
 ﻿using System;
 using BrainStorm.Processors.SP2000.Processor;
 using BrainStorm.Processors.SP2000.Memory;
-using brainstorm.Base;
-using brainstorm.Exceptions;
+using BrainStorm.Base;
+using BrainStorm.Exceptions;
 
 namespace BrainStorm.Processors.SP2000.Instructions.Jump
 {

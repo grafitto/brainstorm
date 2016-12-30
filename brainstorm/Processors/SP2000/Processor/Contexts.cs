@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace brainstorm.Processors.SP2000.Processor
+namespace BrainStorm.Processors.SP2000.Processor
 {
     sealed class Contexts
     {
