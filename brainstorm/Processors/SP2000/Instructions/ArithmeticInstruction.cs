@@ -2,7 +2,7 @@
 
 namespace BrainStorm.Processors.SP2000.Instructions
 {
-    abstract class ArithmeticInstruction : ThreeOpInstruction
+    abstract class ArithmeticInstruction : ThreeOperandInstruction
     {
         protected string destination;
         protected string firstOperand;
