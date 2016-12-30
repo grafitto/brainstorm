@@ -4,7 +4,7 @@ using BrainStorm.Processors.SP2000.Memory;
 using brainstorm.Base;
 using brainstorm.Exceptions;
 
-namespace brainstorm.Processors.SP2000.Instructions.Jump
+namespace BrainStorm.Processors.SP2000.Instructions.Jump
 {
     class JrInstruction : OneOperandInstruction
     {

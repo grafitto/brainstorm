@@ -8,7 +8,7 @@ using BrainStorm.Processors.SP2000.Memory;
 using brainstorm.Exceptions;
 using brainstorm.Base;
 
-namespace brainstorm.Processors.SP2000.Instructions.Memory
+namespace BrainStorm.Processors.SP2000.Instructions.Memory
 {
     class SwInstruction : TwoOperandInstruction
     {

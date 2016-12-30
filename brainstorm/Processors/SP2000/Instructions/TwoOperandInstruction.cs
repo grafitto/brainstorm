@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace brainstorm.Processors.SP2000.Instructions
+namespace BrainStorm.Processors.SP2000.Instructions
 {
     class TwoOperandInstruction : SP2000Instruction
     {

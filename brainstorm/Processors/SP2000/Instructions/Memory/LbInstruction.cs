@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace brainstorm.Processors.SP2000.Instructions.Memory
+namespace BrainStorm.Processors.SP2000.Instructions.Memory
 {
     class LbInstruction : TwoOperandInstruction
     {

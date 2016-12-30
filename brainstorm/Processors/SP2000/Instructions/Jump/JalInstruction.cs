@@ -8,7 +8,7 @@ using BrainStorm.Processors.SP2000.Memory;
 using brainstorm.Exceptions;
 using brainstorm.Base;
 
-namespace brainstorm.Processors.SP2000.Instructions.Jump
+namespace BrainStorm.Processors.SP2000.Instructions.Jump
 {
     class JalInstruction : OneOperandInstruction
     {

@@ -3,7 +3,7 @@ using brainstorm.Exceptions;
 using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
 
-namespace brainstorm.Processors.SP2000.Instructions.Jump
+namespace BrainStorm.Processors.SP2000.Instructions.Jump
 {
     class JInstruction : OneOperandInstruction
     {

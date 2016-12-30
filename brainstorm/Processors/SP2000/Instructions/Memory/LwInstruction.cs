@@ -10,7 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace brainstorm.Processors.SP2000.Instructions.Memory
+namespace BrainStorm.Processors.SP2000.Instructions.Memory
 {
     class LwInstruction : TwoOperandInstruction
     {

@@ -4,7 +4,7 @@ using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
 using System;
 
-namespace brainstorm.Processors.SP2000.Instructions.Memory
+namespace BrainStorm.Processors.SP2000.Instructions.Memory
 {
     class MfhiInstruction : OneOperandInstruction
     {
