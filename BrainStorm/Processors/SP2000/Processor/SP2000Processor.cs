@@ -8,11 +8,18 @@ namespace BrainStorm.Processors.SP2000.Processor
     class SP2000Processor : Base.Processor
     {
         private SP2000Core[] cores;
+        public SP2000Core[] Chips
+        {
+            get
+            {
+                return this.cores;
+            }
+        }
         private int context = 0;
         private static int DEFAULT_CONTEXT = 0;
         //private static int INC_CONTEXT_PC = 0;
 
-        public SP2000Processor(SP200InstructionMemory program, int cores = 1) : base(program, cores)
+        public SP2000Processor(SP2000InstructionMemory program, int cores = 1) : base(program, cores)
         {
             this.cores = new SP2000Core[cores];
             for(int i = 0; i < cores; i++)
