@@ -7,7 +7,7 @@
     <ProjectGuid>{5CECFE31-4142-47A0-B636-DD993136369E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>brainstorm</RootNamespace>
+    <RootNamespace>BrainStorm</RootNamespace>
     <AssemblyName>brainstorm</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -32,16 +32,22 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assemblers\SP2000Assembler.cs" />
+    <Compile Include="Base\Assembler.cs" />
     <Compile Include="Base\Core.cs" />
     <Compile Include="Base\Instruction.cs" />
     <Compile Include="Base\Memory.cs" />
     <Compile Include="Base\Processor.cs" />
     <Compile Include="Base\Register.cs" />
     <Compile Include="Base\RegisterSet.cs" />
+    <Compile Include="Base\Simulator.cs" />
     <Compile Include="Exceptions\AssemblerException.cs" />
     <Compile Include="Exceptions\MemoryException.cs" />
     <Compile Include="Exceptions\ProcessorException.cs" />
@@ -91,15 +97,19 @@
     <Compile Include="Processors\SP2000\Instructions\TwoOperandInstruction.cs" />
     <Compile Include="Processors\SP2000\Memory\SP2000DataMemory.cs" />
     <Compile Include="Processors\SP2000\Memory\SP2000Registers.cs" />
-    <Compile Include="Processors\SP2000\Memory\SP200InstructionMemory.cs" />
+    <Compile Include="Processors\SP2000\Memory\SP2000InstructionMemory.cs" />
     <Compile Include="Processors\SP2000\Processor\Contexts.cs" />
     <Compile Include="Processors\SP2000\Processor\SP2000Core.cs" />
     <Compile Include="Processors\SP2000\Processor\SP2000Processor.cs" />
+    <Compile Include="Simulators\SP2000Simulator.cs" />
     <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Emulator\" />
