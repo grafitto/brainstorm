@@ -42,7 +42,7 @@ namespace BrainStorm.Base
         /// </summary>
         /// <param name="data"></param>
         /// <param name="address"></param>
-        public void StoreWord(int data, int address)
+        public int StoreWord(int data, int address)
         {
             lock (StoreWordPadlock)
             {
@@ -53,6 +53,7 @@ namespace BrainStorm.Base
                     this.memory[address] = temp[i];
                     address = address + 1;
                 }
+                return temp.Length;
             }
         }
 
@@ -74,11 +75,12 @@ namespace BrainStorm.Base
         /// </summary>
         /// <param name="data"></param>
         /// <param name="address"></param>
-        public void StoreByte(byte data, int address)
+        public int StoreByte(byte data, int address)
         {
             lock (StoreBytePadlock)
             {
                 this.memory[address] = data;
+                return 1;
             }
         }
 
@@ -90,6 +92,49 @@ namespace BrainStorm.Base
         private byte[] GetBytesFromWord(int word)
         {
             return BitConverter.GetBytes(word);
+        }
+
+        /// <summary>
+        /// Stores string bytes in memory
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="address"></param>
+        public int StoreStringBytes(string input, int address)
+        {
+          
+            byte[] bytes = Encoding.ASCII.GetBytes(input);
+            foreach(byte b in bytes)
+            {
+                this.StoreByte(b, address++);
+            }
+            return bytes.Length;
+        }
+
+        /// <summary>
+        /// Reads a string from memory
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        public string LoadString(int address)
+        {
+            List<byte> bytes = new List<byte>();
+            do
+            {
+                bytes.Add(this.LoadByte(address++));
+            } while (this.memory[address] != '\n');
+            return BitConverter.ToString(bytes.ToArray());
+        }
+
+        public int StoreWords(int[] data, int address)
+        {
+            int length = 0;
+            foreach(int item in data)
+            {
+                int written = this.StoreWord(item, address);
+                address += written;
+                length += written;
+            }
+            return length;
         }
     }
 }
