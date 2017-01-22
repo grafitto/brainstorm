@@ -34,7 +34,7 @@ namespace BrainStorm.Processors.SP2000.Processor
                 Register register = registers.FetchRegister("PC");
                 SP2000Instruction current = this.getInstruction(register.Value);
                 current.execute(this);
-                //Registers.ShowRegisters(); //Will change in future
+                Registers.ShowRegisters(); //Will change in future
         }
 
         /// <summary>
