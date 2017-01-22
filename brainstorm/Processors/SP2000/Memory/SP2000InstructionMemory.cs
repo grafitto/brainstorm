@@ -2,7 +2,7 @@
 
 namespace BrainStorm.Processors.SP2000.Memory
 {
-    class SP200InstructionMemory : InstructionMemory
+    class SP2000InstructionMemory : InstructionMemory
     {
     }
 }
