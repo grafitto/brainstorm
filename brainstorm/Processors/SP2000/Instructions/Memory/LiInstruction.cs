@@ -17,7 +17,16 @@ namespace BrainStorm.Processors.SP2000.Instructions.Memory
         {
             immidiate = secondOperand;
         }
-
+        public LiInstruction(string instruction, string firstOperand, string secondOperand) : base(instruction, firstOperand, secondOperand)
+        {
+            try
+            {
+                immidiate = Convert.ToInt32(secondOperand);
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
         /// <summary>
         /// This excecuted the instruction and changes the CPU register values
         /// </summary>
