@@ -1,4 +1,5 @@
 ﻿using BrainStorm.Exceptions;
+using BrainStorm.Processor.SP2000.Instructions;
 using BrainStorm.Processors.SP2000.Memory;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace BrainStorm.Base
         private string filename = String.Empty;
         private FileStream stream;
         private int dataAddress = 0;
+        private int codeAddress = 0;
+        private int instructionAddress = 0;
         private bool isDataSection = false;
         private bool isTextSection = false;
         private Dictionary<string, int> dataLabels = new Dictionary<string, int>();
@@ -54,7 +57,7 @@ namespace BrainStorm.Base
         public SP2000InstructionMemory Assemble()
         {
             int lineNumber = 0;
-            foreach(string line in codeLines)
+            foreach (string line in codeLines)
             {
                 string[] lineItems = line.Split(new char[] { ' ', ',' });
                 lineNumber += 1;
@@ -77,24 +80,97 @@ namespace BrainStorm.Base
                 if (isTextSection)
                 {
                     //Process text section
+                    //Check if a label is the only one in a line
+                    if (Regex.IsMatch(line, @"[a-zA-Z]+: *"))
+                    {
+                        //Line is A Label
+                        labels.Add(line, codeAddress);
 
+                    }
+                    if(Regex.IsMatch(line, @"syscall"))
+                    {
+                        string name = line;
+                        var  characters = name.ToCharArray();
+                        characters[0] = characters[0].ToString().ToUpper().ToCharArray()[0];
+                        name = new string(characters);
+                        string className = "BrainStorm.Processors.SP2000.Instructions." + name + "Instruction";
+                        var instruction = Activator.CreateInstance(Type.GetType(className));
+                        this.memory.Push((Instruction)instruction, instructionAddress++);
+                    }
+                    if (Regex.IsMatch(line, @"[a-z]+ +\$[a-z]{1}[0-9]{1} *, *. *"))
+                    {
+                        //This detects assembly code
+
+                        Regex expression = new Regex(@"(:?[a-z]+) +(:?\$[a-z]{1}[0-9]{1}) *, *(:?.+) *");
+                        Match group = expression.Match(line);
+
+                        this.CreateInstruction(line, group.Groups[1].Value, group.Groups[2].Value, group.Groups[3].Value);
+                    }
+                    /**
+                    nderitukelvin19@gmail.com 
+                    nderitukelvin@gmail.com
+                    13s01acs010@anu.ac.ke
+                    johndoe@students.jkuat.ac.ke
+
+                    ============================================
+                    ASCII character encoding
+                    ============================================
+
+                    ----------------------------------------------
+                    |  NUMBERS   |  HEXADECIMAL  |  BINARY       | 
+                    ----------------------------------------------
+                    |  0        |  0x30          |  0b00110001   |
+                    ----------------------------------------------
+                    |  1        |  0x31          |  0b00110010   |
+                    ----------------------------------------------
+                    |  2        |  0x32          |  0b00110011   |
+                    ----------------------------------------------
+
+                    ----------------------------------------------
+                    |  LETTER   |  HEXADECIMAL    |  BINARY      |
+                    ----------------------------------------------
+                    |  A        |   0x41          |  0b01000001  |
+                    ----------------------------------------------
+                    |  B        |   0x42          |  0b01000010  |
+                    ----------------------------------------------
+                    |  C        |   0x43          |  0b01000011  |
+                    ----------------------------------------------
+
+                    ----------------------------------------------
+                    |  LETTER   |  HEXADECIMAL    |  BINARY      |
+                    ----------------------------------------------
+                    |  a        |   0x61          |  0b01100001  |
+                    ----------------------------------------------
+                    |  b        |   0x62          |  0b01100010  |
+                    ----------------------------------------------
+                    |  c        |   0x63          |  0b01100011  |
+                    ----------------------------------------------
+                    s = 0b01110011 
+                    i = 0b01101001
+                    m = 0b01101101
+                    o = 0b01101111
+                    n = 0b01101110
+                      
+                      0x73, 0x69, 0x6D, 0x6F, 0x6E
+                      0111001101101001011011010110111101101110
+                    */
                     //Go to the next line
                     continue;
                 }
                 //If we are not in the data section then start from the beginning till we find the data section
-                
+
                 if (Regex.IsMatch(lineItems[0], ".data"))
                 {
-                    if(lineItems.Length == 2)
+                    if (lineItems.Length == 2)
                     {
                         try
                         {
                             this.dataAddress = Convert.ToInt32(lineItems[1]);
-                        }catch(FormatException e)
+                        } catch (FormatException e)
                         {
                             throw new AssemblerException("Second value must be a word: line " + lineNumber, e);
                         }
-                        
+
                     }
                     if (lineItems.Length > 2)
                         throw new AssemblerException("Unknown items: Line " + lineNumber);
@@ -109,7 +185,7 @@ namespace BrainStorm.Base
                 }
                 else
                 {
-                    throw new AssemblerException("Unknown directive: line " + lineNumber + " .. " + lineItems[1]  );
+                    throw new AssemblerException("Unknown directive: line " + lineNumber + " .. " + lineItems[1]);
                 }
             }
             return memory;
@@ -134,18 +210,20 @@ namespace BrainStorm.Base
 
         private void ParseDataLine(string[] lineItems, int lineNumber)
         {
-            if(Regex.IsMatch(lineItems[0], @"([a-zA-Z]+: *)|(\..+)"))
+            if (Regex.IsMatch(lineItems[0], @"([a-zA-Z]+: *)|(\..+)"))
             {
                 SP2000DataMemory dataMemory = SP2000DataMemory.Instance;
-                switch(lineItems[1].TrimEnd(new char[] { ' ' }))
+                switch (lineItems[1].TrimEnd(new char[] { ' ' }))
                 {
                     case ".asciiz":
                         var temp = lineItems.ToList();
                         temp.RemoveRange(0, 2);
                         string[] final = temp.ToArray();
                         string value = String.Join(" ", final);
+                        value = value.Trim(new char[] { '"' });
                         dataMemory.StoreStringBytes(value, dataAddress);
-                        this.dataLabels.Add(lineItems[0], dataAddress);
+                        string dataName = lineItems[0].TrimEnd(new char[] { ':' });
+                        dataLabels.Add(dataName, dataAddress);
                         int length = Encoding.ASCII.GetByteCount(value);
                         dataAddress += length;
                         break;
@@ -155,15 +233,16 @@ namespace BrainStorm.Base
                         string[] final2 = temp2.ToArray();
                         string value2 = String.Join(" ", final2);
                         dataMemory.StoreStringBytes(value2, dataAddress);
-                        dataLabels.Add(lineItems[0], dataAddress);
+                        string dataName2 = lineItems[0].TrimEnd(new char[] { ':' });
+                        dataLabels.Add(dataName2, dataAddress);
                         int length2 = Encoding.ASCII.GetByteCount(value2);
                         dataAddress += length2;
                         break;
                     case ".word":
                         string[] values = lineItems[2].Trim(new char[] { ' ' }).Split(new char[] { ',' });
-                        Array.ForEach<string>(values, item => item = item.Trim(new char[] { ' ' }) );
+                        Array.ForEach<string>(values, item => item = item.Trim(new char[] { ' ' }));
                         int[] words = new int[values.Length];
-                        for(int i = 0; i < values.Length; i++)
+                        for (int i = 0; i < values.Length; i++)
                         {
                             words[i] = Convert.ToInt32(values[i]);
                         }
@@ -189,13 +268,80 @@ namespace BrainStorm.Base
             }
         }
 
+        private void CreateInstruction(string line, string name, string firstArg, string secondArg)
+        {
+            int secondValue = 0;
+            //replace data sections
+            if(!variables.TryGetValue(secondArg, out secondValue))
+                dataLabels.TryGetValue(secondArg, out secondValue);
+        
+            var  characters = name.ToCharArray();
+            characters[0] = characters[0].ToString().ToUpper().ToCharArray()[0];
+            name = new string(characters);
+            string space = GetNameSpace(name);
+            if(space != "")
+            {
+                name = name + "Instruction";
+                var instruction = Activator.CreateInstance(Type.GetType(space + name, false), new object[] { line, firstArg, secondValue });
+                this.memory.Push((Instruction)instruction, instructionAddress++);
+            }else
+            {
+                Console.WriteLine("Instruction not found");
+            }
+        }
 
-
-
-
-
-
-
+        private string GetNameSpace(string name)
+        {
+            string space = "";
+            switch (name)
+            {
+                case "La":
+                case "Lb":
+                case "Li":
+                case "Lw":
+                case "Mfhi":
+                case "Mflo":
+                case "Sb":
+                case "Sw":
+                    space = "BrainStorm.Processors.SP2000.Instructions.Memory.";
+                    break;
+                case "Ja":
+                case "J":
+                case "Jr":
+                    space = "BrainStorm.Processors.SP2000.Instructions.Jump.";
+                    break;
+                case "Beq":
+                case "Bge":
+                case "Bgt":
+                case "Ble":
+                case "Blt":
+                case "Bne":
+                    space = "BrainStorm.Processors.SP2000.Instructions.Branch.";
+                    break;
+                case "And":
+                case "Andi":
+                case "Nor":
+                case "Or":
+                case "Ori":
+                case "Sll":
+                case "Srl":
+                case "Xor":
+                case "Xori":
+                    space = "BrainStorm.Processors.SP2000.Instructions.Bitwise.";
+                    break;
+                case "Add":
+                case "Addi":
+                case "Addu":
+                case "Div":
+                case "Move":
+                case "Mult":
+                case "Sub":
+                case "Subu":
+                    space = "BrainStorm.Processors.SP2000.Instructions.Arithmetic.";
+                    break;
+            }
+            return space;
+        }
 
 
         public void SeperateSections()
@@ -237,16 +383,6 @@ namespace BrainStorm.Base
             //Close the reader
             reader.Close();
         }
-        /// <summary>
-        /// Reads lines of the file specified
-        /// </summary>
-        public void ParseDataSection()
-        {
-           //These also reassigns variables to text section
-        }
-        public void ParseTextSection()
-        {
-
-        }
+ 
     }
 }
