@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5CECFE31-4142-47A0-B636-DD993136369E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BrainStorm</RootNamespace>
     <AssemblyName>brainstorm</AssemblyName>
@@ -48,6 +48,8 @@
     <Compile Include="Base\Register.cs" />
     <Compile Include="Base\RegisterSet.cs" />
     <Compile Include="Base\Simulator.cs" />
+    <Compile Include="Events\ConsoleReadEventArgs.cs" />
+    <Compile Include="Events\ConsoleWriteEventArgs.cs" />
     <Compile Include="Exceptions\AssemblerException.cs" />
     <Compile Include="Exceptions\MemoryException.cs" />
     <Compile Include="Exceptions\ProcessorException.cs" />
@@ -102,6 +104,11 @@
     <Compile Include="Processors\SP2000\Processor\Contexts.cs" />
     <Compile Include="Processors\SP2000\Processor\SP2000Core.cs" />
     <Compile Include="Processors\SP2000\Processor\SP2000Processor.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Simulators\SP2000Simulator.cs" />
     <Compile Include="Test.cs" />
   </ItemGroup>
@@ -110,10 +117,21 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Emulator\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

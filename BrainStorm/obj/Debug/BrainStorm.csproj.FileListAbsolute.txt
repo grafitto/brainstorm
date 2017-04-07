@@ -3,10 +3,12 @@ C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\bin
 C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\bin\Debug\brainstorm.pdb
 C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\obj\Debug\brainstorm.exe
 C:\Users\Nderitu\Documents\Visual Studio 2015\Projects\brainstorm\brainstorm\obj\Debug\brainstorm.pdb
+D:\REPOSITORIES\brainstorm\brainstorm\bin\Debug\brainstorm.dll.config
+D:\REPOSITORIES\brainstorm\brainstorm\bin\Debug\brainstorm.dll
 D:\REPOSITORIES\brainstorm\brainstorm\bin\Debug\brainstorm.pdb
 D:\REPOSITORIES\brainstorm\brainstorm\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\BrainStorm.csprojResolveAssemblyReference.cache
+D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\brainstorm.dll
 D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\brainstorm.pdb
-D:\REPOSITORIES\brainstorm\brainstorm\bin\Debug\brainstorm.exe.config
-D:\REPOSITORIES\brainstorm\brainstorm\bin\Debug\brainstorm.exe
-D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\brainstorm.exe
-D:\REPOSITORIES\BrainStorm\brainstorm\obj\Debug\BrainStorm.csprojResolveAssemblyReference.cache
+D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\BrainStorm.csproj.GenerateResource.Cache
+D:\REPOSITORIES\brainstorm\brainstorm\obj\Debug\BrainStorm.Properties.Resources.resources
