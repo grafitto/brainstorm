@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BrainStorm.Exceptions
 {
-    class AssemblerException : SimulationException
+    public class AssemblerException : SimulationException
     {
         public AssemblerException() { }
         public AssemblerException(string message) : base(message) { }

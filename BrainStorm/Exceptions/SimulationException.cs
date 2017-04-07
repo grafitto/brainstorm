@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrainStorm.Exceptions
 {
-    abstract class SimulationException : Exception
+    public abstract class SimulationException : Exception
     {
         public SimulationException() { }
         public SimulationException(string message) : base(message) { }

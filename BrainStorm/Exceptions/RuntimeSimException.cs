@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BrainStorm.Exceptions
 {
-    class RuntimeSimException : SimulationException
+    public class RuntimeSimException : SimulationException
     {
         public RuntimeSimException() { }
         public RuntimeSimException(string message) : base(message) { }

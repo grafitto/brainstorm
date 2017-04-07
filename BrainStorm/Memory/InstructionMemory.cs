@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace BrainStorm.Memory
 {
-    class InstructionMemory : Base.Memory, IEnumerable<Dictionary<int,Instruction>>
+    public class InstructionMemory : Base.Memory, IEnumerable<Dictionary<int,Instruction>>
     {
         private Dictionary<int, Instruction> memory;
         public InstructionMemory()
@@ -38,7 +38,10 @@ namespace BrainStorm.Memory
                 throw new MemoryException("Instruction not found in memory: " + Convert.ToString(address, 2) + " -> " + address);
             }
         }
-
+        public int Size()
+        {
+            return memory.Count;
+        }
         /****************************************************************************************/
         /// <summary>
         /// These are just to allow enumeration of the class object
