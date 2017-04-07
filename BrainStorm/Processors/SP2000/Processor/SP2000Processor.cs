@@ -1,11 +1,11 @@
 ﻿using BrainStorm.Processors.SP2000.Memory;
-using BrainStorm.Processors.SP2000.Processor;
+using BrainStorm.Events;
 using BrainStorm.Base;
-using System.Threading;
+using System;
 
 namespace BrainStorm.Processors.SP2000.Processor
 {
-    class SP2000Processor : Base.Processor
+    public class SP2000Processor : Base.Processor
     {
         private SP2000Core[] cores;
         public SP2000Core[] Chips
@@ -32,44 +32,27 @@ namespace BrainStorm.Processors.SP2000.Processor
         public override void Tick()
         {
             this.cores[DEFAULT_CONTEXT].execute();
-            /*
-            for(int i = 0; i < this.cores.Length; i++)
-            {
-                Contexts contexts = Contexts.Instance;
-                if(i == DEFAULT_CONTEXT)
-                {
-                    if(contexts.GetContextAddress(DEFAULT_CONTEXT) != -1)
-                    {
-                        SP2000Registers registers = (SP2000Registers)this.cores[DEFAULT_CONTEXT].Registers;
-                        Register pc = registers.FetchRegister("PC");
-                        pc.SetValue(contexts.GetContextAddress(DEFAULT_CONTEXT));
-                        contexts.SetContextAddress(DEFAULT_CONTEXT, -1);
-                    }
-                    this.cores[DEFAULT_CONTEXT].execute();
-                }
-                else
-                {
-                    if (contexts.GetContextAddress(i) != DEFAULT_CONTEXT)
-                    {
-                        if(contexts.GetContextAddress(i) != INC_CONTEXT_PC)
-                        {
-                            SP2000Registers registers = (SP2000Registers)this.cores[i].Registers;
-                            Register pc = registers.FetchRegister("PC");
-                            pc.SetValue(contexts.GetContextAddress(i));
-                            contexts.SetContextAddress(i, INC_CONTEXT_PC);
-                        }
-                        else
-                        {
-                            new Thread(new ThreadStart(this.cores[i].execute)).Start();
-                        }
-                    }
-                }
-            }
-            */
+            //Handle any print event bubbled
+            this.cores[DEFAULT_CONTEXT].ConsoleWrite += OnConsoleWrite;
+            this.cores[DEFAULT_CONTEXT].ConsoleRead += OnConsoleRead;
         }
-        public void ShowRegisters()
+        public Register[] GetRegisters()
         {
-            this.cores[DEFAULT_CONTEXT].Registers.ShowRegisters();
+            return this.cores[DEFAULT_CONTEXT].GetRegisters();
         }
+
+        public void OnConsoleWrite(object sender, ConsoleWriteEventArgs e)
+        {
+            //Bubble any print event received
+            ConsoleWrite(sender, e);
+        }
+        public void OnConsoleRead(object sender, ConsoleReadEventArgs e)
+        {
+            //Bubble any print event received
+            ConsoleRead(sender, e);
+        }
+
+        public event EventHandler<ConsoleWriteEventArgs> ConsoleWrite;
+        public event EventHandler<ConsoleReadEventArgs> ConsoleRead;
     }
 }

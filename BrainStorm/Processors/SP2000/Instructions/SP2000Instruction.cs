@@ -1,5 +1,5 @@
 ﻿using BrainStorm.Base;
-using BrainStorm.Base;
+using BrainStorm.Events;
 using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
 using System;
@@ -35,5 +35,15 @@ namespace BrainStorm.Processor.SP2000.Instructions
                 pc.SetValue((int)address);
             }
         }
+        protected virtual void OnConsoleWrite(ConsoleWriteEventArgs e)
+        {
+            this.ConsoleWrite(this, e);
+        }
+        protected virtual void OnConsoleRead(ConsoleReadEventArgs e)
+        {
+            this.ConsoleRead(this, e);
+        }
+        public event EventHandler<ConsoleWriteEventArgs> ConsoleWrite;
+        public event EventHandler<ConsoleReadEventArgs> ConsoleRead;
     }
 }

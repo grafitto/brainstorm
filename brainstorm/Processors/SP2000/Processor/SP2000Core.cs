@@ -1,12 +1,13 @@
 ﻿using BrainStorm.Base;
+using BrainStorm.Events;
+using System;
 using BrainStorm.Memory;
-using BrainStorm.Base;
 using BrainStorm.Processor.SP2000.Instructions;
 using BrainStorm.Processors.SP2000.Memory;
 
 namespace BrainStorm.Processors.SP2000.Processor
 {
-    class SP2000Core : Core
+    public class SP2000Core : Core
     {
         private SP2000RegisterSet registers;
         public new SP2000RegisterSet Registers
@@ -31,12 +32,22 @@ namespace BrainStorm.Processors.SP2000.Processor
         /// <param name="address"></param>
         public override void execute()
         {
-                Register register = registers.FetchRegister("PC");
-                SP2000Instruction current = this.getInstruction(register.Value);
-                current.execute(this);
-                Registers.ShowRegisters(); //Will change in future
+            Register register = registers.FetchRegister("PC");
+            SP2000Instruction current = this.getInstruction(register.Value);
+            current.ConsoleWrite += OnConsoleWrite;
+            current.ConsoleRead += OnConsoleRead;
+            current.execute(this);
+            //Register any print event bubbled
+            //Registers.ShowRegisters(); //Will change in future
         }
-
+        /// <summary>
+        /// Returns all the registers in this core
+        /// </summary>
+        /// <returns></returns>
+        public Register[] GetRegisters()
+        {
+            return this.Registers.GetRegisters();
+        }
         /// <summary>
         /// Gets an instruction in an address
         /// </summary>
@@ -47,5 +58,18 @@ namespace BrainStorm.Processors.SP2000.Processor
             
             return (SP2000Instruction)Program.Pop((int)address);
         }
+
+        public void OnConsoleWrite(object sender, ConsoleWriteEventArgs e)
+        {
+            //Bubble up the print event
+            ConsoleWrite(sender, e);
+        }
+        public void OnConsoleRead(object sender, ConsoleReadEventArgs e)
+        {
+            //Bubble up the print event
+            ConsoleRead(sender, e);
+        }
+        public event EventHandler<ConsoleWriteEventArgs> ConsoleWrite;
+        public event EventHandler<ConsoleReadEventArgs> ConsoleRead;
     }
 }

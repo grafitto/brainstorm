@@ -13,7 +13,7 @@ namespace BrainStorm.Processors.SP2000.Instructions.Memory
         public override void execute(SP2000Core core)
         {
             SP2000Registers registers = (SP2000Registers)core.Registers;
-
+            Console.WriteLine("MFLO here");
             try
             {
                 Register destination = registers.FetchRegister(firstOperand);
