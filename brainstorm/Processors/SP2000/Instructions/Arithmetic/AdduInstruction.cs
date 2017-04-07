@@ -5,7 +5,7 @@ using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
 using System;
 
-namespace BrainStorm.Processors.SP2000.Instructions
+namespace BrainStorm.Processors.SP2000.Instructions.Arithmetic
 {
     class AdduInstruction : ArithmeticInstruction
     {

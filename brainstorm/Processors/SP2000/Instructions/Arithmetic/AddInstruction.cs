@@ -4,7 +4,7 @@ using BrainStorm.Processors.SP2000.Processor;
 using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Base;
 
-namespace BrainStorm.Processors.SP2000.Instructions
+namespace BrainStorm.Processors.SP2000.Instructions.Arithmetic
 {
     class AddInstruction : ArithmeticInstruction
     {
