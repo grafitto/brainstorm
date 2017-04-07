@@ -2,7 +2,7 @@
 
 namespace BrainStorm.Base
 {
-    abstract class Processor
+    public abstract class Processor
     {
         public int cycles;
         private InstructionMemory program;
@@ -13,13 +13,6 @@ namespace BrainStorm.Base
             set { this.program = Program; }
         }
 
-        private DataMemory memory;
-
-        public DataMemory Memory
-        {
-            get { return memory; }
-            set { this.memory = Memory; }
-        }
         private int cores;
         public int Cores
         {
@@ -27,10 +20,9 @@ namespace BrainStorm.Base
             set { this.cores = Cores; }
         }
 
-        public Processor(InstructionMemory program, DataMemory memory, int cores = 1)
+        public Processor(InstructionMemory program, int cores = 1)
         {
             this.program = program;
-            this.memory = memory;
             this.cores = cores;
         }
 
@@ -39,6 +31,6 @@ namespace BrainStorm.Base
         /// </summary>
         /// <param name="instruction"></param>
 
-        public virtual void tick(Instruction instruction) { }
+        public virtual void Tick() { }
     }
 }

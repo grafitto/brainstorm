@@ -1,6 +1,6 @@
 ﻿namespace BrainStorm.Base
 {
-    abstract class Instruction
+    public abstract class Instruction
     {
         private string instruction;
         private int cycles;

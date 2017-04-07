@@ -1,47 +1,40 @@
 ﻿using BrainStorm.Processors.SP2000.Memory;
-using BrainStorm.Processors.SP2000.Processor;
 using System;
-using BrainStorm.Processors.SP2000.Instructions.Bitwise;
+using BrainStorm.Base;
+using BrainStorm.Simulators;
+using BrainStorm.Assemblers;
+using System.Collections.Generic;
 
 namespace BrainStorm
 {
-
     class Test
     {
+        
         public static void Main(string[] args)
         {
-           SP2000Registers registers = new SP2000Registers();
 
-           registers.StoreToName("$s2", 4);
-           registers.StoreToName("$s0", 60);
-           registers.StoreToName("$s1", 2);
-           //registers.ShowRegisters();
-
+            string file = @"C:\Users\Nderitu\Desktop\emulation\mips.asm";
+            SP2000Assembler assembler = new SP2000Assembler(file);
+            SP2000InstructionMemory mem = assembler.Assemble();
+            foreach(KeyValuePair<int, Instruction> ins in mem)
+            {
+                Console.WriteLine(ins.Key + " => " + ins.Value);
+            }
            
-            SP200InstructionMemory program = new SP200InstructionMemory();
-            SP2000DataMemory memory = new SP2000DataMemory();
-
-            SP2000Processor chip = new SP2000Processor(program, memory, registers);
-
-            SrlInstruction add = new SrlInstruction("srl $s2, $s0, 2", "$s2", "$s0", "2");
-
-            chip.tick(add);
-            registers.ShowRegisters();
-
-            /*  int value = 1088;
-
-             value = value << 16;
-             Convert(value);
-             int res = (int)(value & 0xFFFF0000);
-
-             Convert(res); */
-
+            SP2000Simulator mips = new SP2000Simulator(0, mem, mem.Size());
+            foreach(Register reg in mips.GetRegisters())
+            {
+                Console.WriteLine(reg.GetNames()[0] + " => " + reg.GetValue());
+            }
+            //SP2000DataMemory.Instance.ShowMemory();
+        
         }
+
         public static void Convert(int num)
         {
-            for(int i = 0; i < 32; i++)
+            for(int i = 0; i < 8; i++)
             {
-                if((num & (0x80000000 >> i)) > 0)
+                if((num & (0x80 >> i)) > 0)
                 {
                     Console.Write("1");
                 }else
@@ -51,5 +44,7 @@ namespace BrainStorm
             }
             Console.WriteLine("");
         }
+    
     }
+   
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BrainStorm.Base
 {
-    abstract class RegisterSet
+    public abstract class SP2000RegisterSet
     {
         private Register[] registers;
 
@@ -17,7 +17,7 @@ namespace BrainStorm.Base
         /// Initialization if registers and indices
         /// </summary>
         /// <param name="size"></param>
-        public RegisterSet(int size)
+        public SP2000RegisterSet(int size)
         {
             this.registers = new Register[size];
         }
@@ -29,7 +29,7 @@ namespace BrainStorm.Base
         /// <returns>int</returns>
         private Register Lookup(string name)
         {
-            Console.WriteLine("Looking up");
+            //Console.WriteLine("Looking up");
             Register final = null;
             foreach(Register register in registers) {
                                                             //Console.WriteLine("  Looking for name: " + name + " on register: " + register.Names[0]);
@@ -39,9 +39,6 @@ namespace BrainStorm.Base
                     {
                                                             //Console.WriteLine("      Found!!!");
                         final = register;
-                    }else
-                    {
-                                                            //Console.WriteLine("     Not found, continue looking...");
                     }
                     if (final != null) break;
                 }
@@ -136,25 +133,36 @@ namespace BrainStorm.Base
             Register register = this.Lookup(name);
             register.SetValue(value);
         }
-
+        /// <summary>
+        /// Returns all the registers available
+        /// </summary>
+        /// <returns></returns>
+        public Register[] GetRegisters()
+        {
+            return registers;
+        }
+        /// <summary>
+        /// Sets all registers to 0
+        /// </summary>
+        public void ClearRegisters()
+        {
+            foreach(Register register in registers)
+            {
+                register.SetValue(0);
+            }
+        }
         /// <summary>
         /// This displays the values of a register, this is a testing method and should be removed in future
         /// </summary>
-        public void ShowRegisters()
+        public override string ToString()
         {
             Console.WriteLine("Registers");
-            foreach (Register register in registers)
-            {
-                if (register != null) {
-                    Console.Write(register.Value);
-                    Console.Write(" ");
-                    Console.Write(register.Names[0]);
-                    Console.Write(" ");
-                    Console.Write(register.Text);
-                }
-                Console.WriteLine("");
+            string registers = "";
+            foreach (Register register in this.registers)
+            { 
+                registers += register.GetNames()[0] + " => " + register.GetValue() + "\n";
             }
-       
+            return registers;
         }
     }
 }

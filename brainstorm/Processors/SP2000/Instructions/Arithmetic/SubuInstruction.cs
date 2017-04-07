@@ -4,9 +4,7 @@ using BrainStorm.Processors.SP2000.Instructions;
 using BrainStorm.Processors.SP2000.Memory;
 using BrainStorm.Processors.SP2000.Processor;
 using System;
-
-
-namespace BrainStorm.Processors.SP2000.Instructions
+namespace BrainStorm.Processors.SP2000.Instructions.Arithmetic
 {
     class SubuInstruction : ArithmeticInstruction
     {
@@ -23,9 +21,9 @@ namespace BrainStorm.Processors.SP2000.Instructions
         /// This excecuted the instruction and changes the CPU register values
         /// </summary>
         /// <param name="processor"></param>
-        public override void execute(SP2000Core processor)
+        public override void execute(SP2000Core core)
         {
-            SP2000Registers registers = (SP2000Registers)processor.Registers;
+            SP2000Registers registers = (SP2000Registers)core.Registers;
             uint result = 0;
             try
             {
@@ -42,6 +40,8 @@ namespace BrainStorm.Processors.SP2000.Instructions
             finally
             {
                 registers.StoreToName(destination, result);
+                this.increamentPC(core);
+                core.Cycles += Cycles;
             }
         }
     }

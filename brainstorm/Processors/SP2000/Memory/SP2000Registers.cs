@@ -1,15 +1,12 @@
 ﻿using BrainStorm.Base;
+using BrainStorm.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrainStorm.Processors.SP2000.Memory
 {
-    class SP2000Registers : RegisterSet
+    public class SP2000Registers : SP2000RegisterSet
     {
-        public SP2000Registers() : base(32)
+        public SP2000Registers() : base(35)
         {
             this.MakeRegister(new string[] { "zero" }, 0, "This register is hardwired to ZERO and cannot be changed"); //Always ZERO
             this.MakeRegister(new string[] { "$at" }, 1);
@@ -59,6 +56,9 @@ namespace BrainStorm.Processors.SP2000.Memory
 
             //Return address
             this.MakeRegister(new string[] { "$ra" }, 31);
+
+            //These addresses are UNTOUCHABLE
+            this.MakeRegisters(new string[] { "PC", "HI", "LO" }, new int[] { 32, 33, 34 });
         }
 
         internal void StoreToName(string destination, uint result)
@@ -71,6 +71,21 @@ namespace BrainStorm.Processors.SP2000.Memory
             {
                 base.StoreToName(destination, result);
             }
+        }
+        internal long GetHILO64()
+        {
+            int hi = FetchRegister("HI").GetValue();
+            int lo = FetchRegister("LO").GetValue();
+
+            long temp = (hi << 32);
+            return (temp | (long)lo);
+        }
+        internal void SetHILO64(long value)
+        {
+            int lo = (int)(value & 0x00000000FFFFFFFF);
+            StoreToName("LO", lo);
+            int hi = (int)((value & unchecked((long)0xFFFFFFFF00000000)) >> 32);
+            StoreToName("HI", hi);
         }
     }
 }

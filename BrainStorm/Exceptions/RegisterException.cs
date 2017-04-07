@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrainStorm.Exceptions
 {
-    class RegisterException : MemoryException
+    public class RegisterException : MemoryException
     {
         public RegisterException() { }
         public RegisterException(string message) : base(message) { }

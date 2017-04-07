@@ -7,7 +7,7 @@
     <ProjectGuid>{5CECFE31-4142-47A0-B636-DD993136369E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>brainstorm</RootNamespace>
+    <RootNamespace>BrainStorm</RootNamespace>
     <AssemblyName>brainstorm</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -32,16 +32,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assemblers\SP2000Assembler.cs" />
+    <Compile Include="Base\Assembler.cs" />
     <Compile Include="Base\Core.cs" />
     <Compile Include="Base\Instruction.cs" />
     <Compile Include="Base\Memory.cs" />
     <Compile Include="Base\Processor.cs" />
     <Compile Include="Base\Register.cs" />
     <Compile Include="Base\RegisterSet.cs" />
+    <Compile Include="Base\Simulator.cs" />
+    <Compile Include="Events\ConsoleReadEventArgs.cs" />
+    <Compile Include="Events\ConsoleWriteEventArgs.cs" />
     <Compile Include="Exceptions\AssemblerException.cs" />
     <Compile Include="Exceptions\MemoryException.cs" />
     <Compile Include="Exceptions\ProcessorException.cs" />
@@ -53,7 +61,9 @@
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\AddiInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\AdduInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\AddInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Arithmetic\DivInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\MoveInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Arithmetic\MultInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\AndiInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\AndInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\ArithmeticInstruction.cs" />
@@ -62,25 +72,67 @@
     <Compile Include="Processors\SP2000\Instructions\Bitwise\OrInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\SllInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\SrlInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Branch\BeqInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Branch\BgeInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Branch\BgtInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Branch\BleInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Branch\BltInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Branch\BneInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Jump\JalInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Jump\JInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Jump\JrInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\LaInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\LbInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\LiInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\LwInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\MfhiInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\MfloInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\SbInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\Memory\SwInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\OneOperandInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\SP2000Instruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\SubInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Arithmetic\SubuInstruction.cs" />
-    <Compile Include="Processors\SP2000\Instructions\ThreeOpInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\SyscallInstruction.cs" />
+    <Compile Include="Processors\SP2000\Instructions\ThreeOperandInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\XoriInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\Bitwise\XorInstruction.cs" />
     <Compile Include="Processors\SP2000\Instructions\TwoOperandInstruction.cs" />
     <Compile Include="Processors\SP2000\Memory\SP2000DataMemory.cs" />
     <Compile Include="Processors\SP2000\Memory\SP2000Registers.cs" />
-    <Compile Include="Processors\SP2000\Memory\SP200InstructionMemory.cs" />
+    <Compile Include="Processors\SP2000\Memory\SP2000InstructionMemory.cs" />
+    <Compile Include="Processors\SP2000\Processor\Contexts.cs" />
     <Compile Include="Processors\SP2000\Processor\SP2000Core.cs" />
     <Compile Include="Processors\SP2000\Processor\SP2000Processor.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Simulators\SP2000Simulator.cs" />
     <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Emulator\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

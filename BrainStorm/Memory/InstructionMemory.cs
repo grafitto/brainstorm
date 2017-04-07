@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace BrainStorm.Memory
 {
-    class InstructionMemory : Base.Memory, IEnumerable<Dictionary<int,Instruction>>
+    public class InstructionMemory : Base.Memory, IEnumerable<Dictionary<int,Instruction>>
     {
         private Dictionary<int, Instruction> memory;
         public InstructionMemory()
@@ -19,7 +19,7 @@ namespace BrainStorm.Memory
         /// </summary>
         /// <param name="instruction">Instruction to be saved</param>
         /// <param name="address">Address to save the instruction</param>
-        public void push(Instruction instruction, int address)
+        public void Push(Instruction instruction, int address)
         {
             memory.Add(address, instruction);
         }
@@ -30,7 +30,7 @@ namespace BrainStorm.Memory
         /// <param name="address">Address for instruction retrieval</param>
         /// <returns name="Instruction">The instruction returned</returns>
         /// <exception cref="MemoryException">When the address specified is not found, MemoryException is throw</exception>
-        public Instruction pop(int address)
+        public Instruction Pop(int address)
         {
             if(memory.ContainsKey(address)){
                 return memory[address];
@@ -38,7 +38,10 @@ namespace BrainStorm.Memory
                 throw new MemoryException("Instruction not found in memory: " + Convert.ToString(address, 2) + " -> " + address);
             }
         }
-
+        public int Size()
+        {
+            return memory.Count;
+        }
         /****************************************************************************************/
         /// <summary>
         /// These are just to allow enumeration of the class object

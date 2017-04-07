@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrainStorm.Exceptions
 {
-    class MemoryException : RuntimeSimException
+    public class MemoryException : RuntimeSimException
     {
         public MemoryException() { }
         public MemoryException(string message) : base(message) { }
