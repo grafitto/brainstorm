@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 namespace BrainStorm.Base
 {
     
-    abstract class Memory
+    public abstract class Memory
     {
         private readonly static object StoreWordPadlock = new object();
         private readonly static object StoreBytePadlock = new object();
 
         protected byte[] memory;
 
+        public byte[] GetMemory
+        {
+            get { return memory; }
+        }
         /// <summary>
         /// Initializes the size to be 1024 bytes = 1 Kilobyte
         /// </summary>
@@ -118,13 +122,19 @@ namespace BrainStorm.Base
         public string LoadString(int address)
         {
             List<byte> bytes = new List<byte>();
-            do
+            while (true)
             {
+                if (this.memory[address] == 0x005C && this.memory[address + 1] == 0x006E) break;
                 bytes.Add(this.LoadByte(address++));
-            } while (this.memory[address] != '\n');
-            return BitConverter.ToString(bytes.ToArray());
+            }
+            return Encoding.ASCII.GetString(bytes.ToArray());
         }
-
+        /// <summary>
+        /// Stores words in memory
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="address"></param>
+        /// <returns></returns>
         public int StoreWords(int[] data, int address)
         {
             int length = 0;
