@@ -4,7 +4,7 @@ using System;
 
 namespace BrainStorm.Processors.SP2000.Memory
 {
-    class SP2000Registers : SP2000RegisterSet
+    public class SP2000Registers : SP2000RegisterSet
     {
         public SP2000Registers() : base(35)
         {
