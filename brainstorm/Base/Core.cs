@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BrainStorm.Base
 {
-    abstract class Core
+    public abstract class Core
     {
         private SP2000RegisterSet registers;
         public SP2000RegisterSet Registers

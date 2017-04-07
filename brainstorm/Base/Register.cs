@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrainStorm.Base
 {
-    class Register
+    public class Register
     {
         private string[] names;
         public string[] Names
@@ -33,6 +33,10 @@ namespace BrainStorm.Base
             this.names = names;
             this.value = value;
             this.text = text;
+        }
+        public string[] GetNames()
+        {
+            return Names;
         }
         public int GetValue()
         {

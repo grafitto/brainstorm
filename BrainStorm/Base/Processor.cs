@@ -2,7 +2,7 @@
 
 namespace BrainStorm.Base
 {
-    abstract class Processor
+    public abstract class Processor
     {
         public int cycles;
         private InstructionMemory program;

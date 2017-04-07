@@ -1,6 +1,6 @@
 ﻿namespace BrainStorm.Base
 {
-    abstract class Assembler
+    public abstract class Assembler
     {
     }
 
