@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BrainStorm.Base
 {
-    abstract class SP2000RegisterSet
+    public abstract class SP2000RegisterSet
     {
         private Register[] registers;
 
@@ -133,25 +133,36 @@ namespace BrainStorm.Base
             Register register = this.Lookup(name);
             register.SetValue(value);
         }
-
+        /// <summary>
+        /// Returns all the registers available
+        /// </summary>
+        /// <returns></returns>
+        public Register[] GetRegisters()
+        {
+            return registers;
+        }
+        /// <summary>
+        /// Sets all registers to 0
+        /// </summary>
+        public void ClearRegisters()
+        {
+            foreach(Register register in registers)
+            {
+                register.SetValue(0);
+            }
+        }
         /// <summary>
         /// This displays the values of a register, this is a testing method and should be removed in future
         /// </summary>
-        public void ShowRegisters()
+        public override string ToString()
         {
             Console.WriteLine("Registers");
-            foreach (Register register in registers)
-            {
-                if (register != null && register.GetValue() != 0) {
-                    Console.Write(register.Value);
-                    Console.Write(" ");
-                    Console.Write(register.Names[0]);
-                    Console.Write(" ");
-                    Console.Write(register.Text);
-                }
-                Console.WriteLine("");
+            string registers = "";
+            foreach (Register register in this.registers)
+            { 
+                registers += register.GetNames()[0] + " => " + register.GetValue() + "\n";
             }
-            Console.WriteLine("__________________________________________________");
+            return registers;
         }
     }
 }
