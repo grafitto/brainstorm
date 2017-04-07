@@ -1,5 +1,5 @@
 ﻿using BrainStorm.Exceptions;
-using BrainStorm.Processor.SP2000.Instructions;
+using BrainStorm.Base;
 using BrainStorm.Processors.SP2000.Memory;
 using System;
 using System.Collections.Generic;
@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace BrainStorm.Base
+namespace BrainStorm.Assemblers
 {
-    class SP2000Assembler : Assembler
+    public class SP2000Assembler : Assembler
     {
         private string filename = String.Empty;
         private FileStream stream;
@@ -68,7 +68,7 @@ namespace BrainStorm.Base
                     if (Regex.IsMatch(lineItems[0], ".text"))
                     {
                         if (lineItems.Length > 2)
-                            throw new AssemblerException("Unknown items: Line " + lineNumber);
+                            throw new AssemblerException("Unknown items: Line " + lineNumber + " => " + lineItems[3]);
                         this.isDataSection = false;
                         this.isTextSection = true;
                         continue;
@@ -96,15 +96,32 @@ namespace BrainStorm.Base
                         string className = "BrainStorm.Processors.SP2000.Instructions." + name + "Instruction";
                         var instruction = Activator.CreateInstance(Type.GetType(className));
                         this.memory.Push((Instruction)instruction, instructionAddress++);
-                    }
-                    if (Regex.IsMatch(line, @"[a-z]+ +\$[a-z]{1}[0-9]{1} *, *. *"))
+                    } 
+                    if (Regex.IsMatch(line, @"[a-z]+ +\$[a-z]{1}[0-9]{1} *, +\$[a-z]{1}[0-9]{1} *, *. *")) //li    $v0, $a0, 4
+                    {
+                        //This detects assembly code
+
+                        Regex expression = new Regex(@"(:?[a-z]+) +(:?\$[a-z]{1}[0-9]{1}) *, +(:?\$[a-z]{1}[0-9]{1}) *, *(:?.+) *");
+                        Match group = expression.Match(line);
+
+                        this.CreateThreeOperandInstruction(line, group.Groups[1].Value, group.Groups[2].Value, group.Groups[3].Value, group.Groups[4].Value);
+                    }else if (Regex.IsMatch(line, @"[a-z]+ +\$[a-z]{1}[0-9]{1} *, *. *")) //li    $v0, 4
                     {
                         //This detects assembly code
 
                         Regex expression = new Regex(@"(:?[a-z]+) +(:?\$[a-z]{1}[0-9]{1}) *, *(:?.+) *");
                         Match group = expression.Match(line);
+                        System.Console.WriteLine("Here");
+                        this.CreateTwoOperandInstruction(line, group.Groups[1].Value, group.Groups[2].Value, group.Groups[3].Value);
+                    }
+                    else if (Regex.IsMatch(line, @"[a-z]+ +\$[a-z]{1}[0-9]{1} *")) //mflo   $v0
+                    {
+                        //This detects assembly code
 
-                        this.CreateInstruction(line, group.Groups[1].Value, group.Groups[2].Value, group.Groups[3].Value);
+                        Regex expression = new Regex(@"(:?[a-z]+) +(:?\$[a-z]{1}[0-9]{1}) *");
+                        Match group = expression.Match(line);
+
+                        this.CreateOneOperandInstruction(line, group.Groups[1].Value, group.Groups[2].Value);
                     }
                     /**
                     nderitukelvin19@gmail.com 
@@ -173,7 +190,7 @@ namespace BrainStorm.Base
 
                     }
                     if (lineItems.Length > 2)
-                        throw new AssemblerException("Unknown items: Line " + lineNumber);
+                        throw new AssemblerException("Unknown items: Line " + lineNumber + " => " + lineItems[2]);
                     this.isDataSection = true;
                     this.isTextSection = false;
                     continue;
@@ -185,7 +202,7 @@ namespace BrainStorm.Base
                 }
                 else
                 {
-                    throw new AssemblerException("Unknown directive: line " + lineNumber + " .. " + lineItems[1]);
+                    throw new AssemblerException("Unknown directive: line " + lineNumber + " => " + lineItems[0]);
                 }
             }
             return memory;
@@ -264,17 +281,42 @@ namespace BrainStorm.Base
             }
             else
             {
-                throw new AssemblerException("Unknown directive: line " + lineNumber);
+                throw new AssemblerException("Unknown directive: line " + lineNumber + " => " + lineItems.ToString());
             }
         }
 
-        private void CreateInstruction(string line, string name, string firstArg, string secondArg)
+        private void CreateOneOperandInstruction(string line, string name, string firstArg)
         {
-            int secondValue = 0;
+
+            //Console.WriteLine(secondValue);
+            var characters = name.ToCharArray();
+            characters[0] = characters[0].ToString().ToUpper().ToCharArray()[0];
+            name = new string(characters);
+            string space = GetNameSpace(name);
+            if (space != "")
+            {
+                name = name + "Instruction";
+                var instruction = Activator.CreateInstance(Type.GetType(space + name, false), new object[] { line, firstArg });
+                this.memory.Push((Instruction)instruction, instructionAddress++);
+            }
+            else
+            {
+                throw new AssemblerException("Unknown instruction <" + name + ">");
+            }
+        }
+        private void CreateTwoOperandInstruction(string line, string name, string firstArg, string secondArg)
+        {
+            string secondValue = "";
             //replace data sections
-            if(!variables.TryGetValue(secondArg, out secondValue))
-                dataLabels.TryGetValue(secondArg, out secondValue);
-        
+            //Console.WriteLine(secondArg);
+            if (variables.ContainsKey(secondArg))
+                secondValue = variables[secondArg].ToString();
+            else if (dataLabels.ContainsKey(secondArg))
+                secondValue = dataLabels[secondArg].ToString();
+            else
+                secondValue = secondArg;
+
+            //Console.WriteLine(secondValue);
             var  characters = name.ToCharArray();
             characters[0] = characters[0].ToString().ToUpper().ToCharArray()[0];
             name = new string(characters);
@@ -282,11 +324,29 @@ namespace BrainStorm.Base
             if(space != "")
             {
                 name = name + "Instruction";
-                var instruction = Activator.CreateInstance(Type.GetType(space + name, false), new object[] { line, firstArg, secondValue });
+                var instruction = Activator.CreateInstance(Type.GetType(space + name, false), new object[] { line, firstArg, secondArg });
                 this.memory.Push((Instruction)instruction, instructionAddress++);
-            }else
+            }else{
+                throw new AssemblerException("Unknown instruction <" + name + ">");
+            }
+        }
+
+        private void CreateThreeOperandInstruction(string line, string name, string firstArg, string secondArg, string thirdArg)
+        {
+            //Console.WriteLine(thirdArg);
+            var characters = name.ToCharArray();
+            characters[0] = characters[0].ToString().ToUpper().ToCharArray()[0];
+            name = new string(characters);
+            string space = GetNameSpace(name);
+            if (space != "")
             {
-                Console.WriteLine("Instruction not found");
+                name = name + "Instruction";
+                //Console.WriteLine("Third arg: " + thirdValue);
+                var instruction = Activator.CreateInstance(Type.GetType(space + name, false), new object[] { line, firstArg, secondArg, thirdArg });
+                this.memory.Push((Instruction)instruction, instructionAddress++);
+                
+            }else{
+                throw new AssemblerException("Unknown instruction <" + name + ">");
             }
         }
 
