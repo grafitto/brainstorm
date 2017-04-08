@@ -104,11 +104,6 @@
     <Compile Include="Processors\SP2000\Processor\Contexts.cs" />
     <Compile Include="Processors\SP2000\Processor\SP2000Core.cs" />
     <Compile Include="Processors\SP2000\Processor\SP2000Processor.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Simulators\SP2000Simulator.cs" />
     <Compile Include="Test.cs" />
   </ItemGroup>
@@ -125,13 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Emulator\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
